@@ -1,0 +1,106 @@
+﻿@model Point_Of_Sale.Employee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeContact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeContact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeePassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeePassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeJoinDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeJoinDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeDateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeDateOfBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeePicture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeePicture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City.CityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City.CityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeAdmin.EmployeeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeAdmin.EmployeeID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
