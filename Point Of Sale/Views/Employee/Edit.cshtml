@@ -7,10 +7,9 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
-{
+<form action="" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Employee</h4>
         <hr />
@@ -53,17 +52,13 @@
             @Html.LabelFor(model => model.EmployeeGender, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.EmployeeGender)
+                    <select class="form-control" name="Gender" id="Gender">
+                        <option value="">Select</option>
+                        <option value="True">Male</option>
+                        <option value="False">Female</option>
+                    </select>
                     @Html.ValidationMessageFor(model => model.EmployeeGender, "", new { @class = "text-danger" })
                 </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmployeeJoinDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EmployeeJoinDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EmployeeJoinDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -94,7 +89,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EmployeePicture, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EmployeePicture, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="file" name="EP" id="EP" class="form-control" />
                 @Html.ValidationMessageFor(model => model.EmployeePicture, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -105,7 +100,7 @@
             </div>
         </div>
     </div>
-}
+</form>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

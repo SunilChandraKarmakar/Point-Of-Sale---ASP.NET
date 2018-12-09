@@ -89,12 +89,16 @@ namespace Point_Of_Sale.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,EmployeeName,EmployeeContact,EmployeeEmail,EmployeePassword,EmployeeGender,EmployeeJoinDate,EmployeeDateOfBirth,EmployeeAddress,EmployeeCityID,EmployeePicture")] Employee employee)
+        public ActionResult Edit(Employee employee, HttpPostedFileBase EP)
         {
+            employee.EmployeeJoinDate = DateTime.Now;
+            employee.EmployeePicture = System.IO.Path.GetFileName(EP.FileName);
+
             if (ModelState.IsValid)
             {
                 db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
+                EP.SaveAs(Server.MapPath("../Images/Uploads/" + employee.ID.ToString() + "_" + employee.EmployeePicture));
                 return RedirectToAction("Index");
             }
             ViewBag.EmployeeCityID = new SelectList(db.Cities, "ID", "CityName", employee.EmployeeCityID);

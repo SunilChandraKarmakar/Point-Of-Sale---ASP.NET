@@ -85,12 +85,15 @@ namespace Point_Of_Sale.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ProductID,ProductImage1,ProductTitle")] ProductImage productImage)
+        public ActionResult Edit(ProductImage productImage, HttpPostedFileBase proImg)
         {
+            productImage.ProductImage1 = System.IO.Path.GetFileName(proImg.FileName);
+
             if (ModelState.IsValid)
             {
                 db.Entry(productImage).State = EntityState.Modified;
                 db.SaveChanges();
+                proImg.SaveAs(Server.MapPath("../Images/ProductImage/" + productImage.ID.ToString() + "_" + productImage.ProductImage1));
                 return RedirectToAction("Index");
             }
             ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductName", productImage.ProductID);

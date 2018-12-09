@@ -48,15 +48,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EmployeeGender)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmployeeJoinDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmployeeJoinDate)
+            @if(Model.EmployeeGender == true)
+            {
+                @Html.Raw("Male")
+            }
+            else
+            {
+                @Html.Raw("Female")
+            }
         </dd>
 
         <dt>
@@ -89,14 +88,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.City.CityName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmployeeAdmin.EmployeeID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmployeeAdmin.EmployeeID)
         </dd>
 
     </dl>
