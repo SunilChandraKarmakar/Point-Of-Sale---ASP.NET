@@ -1,45 +1,102 @@
-﻿@model IEnumerable<Point_Of_Sale.Unit>
+﻿@*@model IEnumerable<Point_Of_Sale.Unit>*@
+@model Point_Of_Sale.Unit
 
 @{
     ViewBag.Title = "Index";
+    var UnitList = ViewBag.UnitList as IEnumerable<Point_Of_Sale.Unit>;
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Unit Dashboard</u></h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrimaryQty)
-        </th>
-        <th></th>
-    </tr>
+@*<p style="margin-bottom:30px;">@Html.ActionLink("Create New", "Create")</p>*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrimaryQty)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+@*Create Button code*@
+<!-- edit Button trigger modal -->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createButton" style="margin-bottom:30px;">
+    Create Unit
+</button>
 
+<!-- create Modal -->
+<div class="modal fade" id="createButton" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="font-size:20px;">Create Unit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="@Url.Action("Create", "Unit")" method="post">
+                    @Html.AntiForgeryToken() 
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UnitName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.UnitName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.UnitName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UnitDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.UnitDescription, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.UnitDescription, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UnitPrimaryQty, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.UnitPrimaryQty, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.UnitPrimaryQty, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>Unit Name</th>
+            <th>Primary Qty</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in UnitList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrimaryQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitDescription)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

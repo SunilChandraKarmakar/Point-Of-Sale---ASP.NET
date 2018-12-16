@@ -17,13 +17,28 @@ namespace Point_Of_Sale.Controllers
         // GET: City
         public ActionResult Index()
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Index";
+                Session["DefaultControll"] = "City";
+                return RedirectToAction("Login", "Employee");
+            }
+
+            ViewBag.CityList = db.Cities.ToList();
             var cities = db.Cities.Include(c => c.Country);
-            return View(cities.ToList());
+            return View();
         }
 
         // GET: City/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Details";
+                Session["DefaultControll"] = "City";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +54,13 @@ namespace Point_Of_Sale.Controllers
         // GET: City/Create
         public ActionResult Create()
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Create";
+                Session["DefaultControll"] = "City";
+                return RedirectToAction("Login", "Employee");
+            }
+
             ViewBag.CountryID = new SelectList(db.Countries, "ID", "CountryName");
             return View();
         }
@@ -50,6 +72,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,CityName,CountryID")] City city)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Create";
+                Session["DefaultControll"] = "City";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Cities.Add(city);
@@ -64,6 +93,13 @@ namespace Point_Of_Sale.Controllers
         // GET: City/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Edit";
+                Session["DefaultControll"] = "City";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -84,6 +120,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,CityName,CountryID")] City city)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Edit";
+                Session["DefaultControll"] = "City";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(city).State = EntityState.Modified;
@@ -97,6 +140,13 @@ namespace Point_Of_Sale.Controllers
         // GET: City/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Delete";
+                Session["DefaultControll"] = "City";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -114,6 +164,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "DeleteConfirmed";
+                Session["DefaultControll"] = "City";
+                return RedirectToAction("Login", "Employee");
+            }
+
             City city = db.Cities.Find(id);
             db.Cities.Remove(city);
             db.SaveChanges();

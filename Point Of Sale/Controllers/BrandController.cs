@@ -17,12 +17,27 @@ namespace Point_Of_Sale.Controllers
         // GET: Brand
         public ActionResult Index()
         {
-            return View(db.Brands.ToList());
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Index";
+                Session["DefaultControll"] = "Brand";
+                return RedirectToAction("Login", "Employee");
+            }
+
+            ViewBag.brandList = db.Brands.ToList();
+            return View();
         }
 
         // GET: Brand/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Details";
+                Session["DefaultControll"] = "Brand";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +53,13 @@ namespace Point_Of_Sale.Controllers
         // GET: Brand/Create
         public ActionResult Create()
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Create";
+                Session["DefaultControll"] = "Brand";
+                return RedirectToAction("Login", "Employee");
+            }
+
             return View();
         }
 
@@ -48,6 +70,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,BrandName,Origin")] Brand brand)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Create";
+                Session["DefaultControll"] = "Brand";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Brands.Add(brand);
@@ -61,6 +90,13 @@ namespace Point_Of_Sale.Controllers
         // GET: Brand/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Edit";
+                Session["DefaultControll"] = "Brand";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +116,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,BrandName,Origin")] Brand brand)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Edit";
+                Session["DefaultControll"] = "Brand";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(brand).State = EntityState.Modified;
@@ -92,6 +135,13 @@ namespace Point_Of_Sale.Controllers
         // GET: Brand/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Delete";
+                Session["DefaultControll"] = "Brand";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +159,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "DeleteConfirmed";
+                Session["DefaultControll"] = "Brand";
+                return RedirectToAction("Login", "Employee");
+            }
+
             Brand brand = db.Brands.Find(id);
             db.Brands.Remove(brand);
             db.SaveChanges();

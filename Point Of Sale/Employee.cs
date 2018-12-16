@@ -11,9 +11,16 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            this.EpmloyeeSalaries = new HashSet<EpmloyeeSalary>();
+        }
+    
         public int ID { get; set; }
         public string EmployeeName { get; set; }
         public string EmployeeContact { get; set; }
@@ -21,6 +28,8 @@ namespace Point_Of_Sale
         public string EmployeePassword { get; set; }
         public bool EmployeeGender { get; set; }
         public System.DateTime EmployeeJoinDate { get; set; }
+
+        [DataType (DataType.Date)]
         public System.DateTime EmployeeDateOfBirth { get; set; }
         public string EmployeeAddress { get; set; }
         public int EmployeeCityID { get; set; }
@@ -28,5 +37,7 @@ namespace Point_Of_Sale
     
         public virtual City City { get; set; }
         public virtual EmployeeAdmin EmployeeAdmin { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EpmloyeeSalary> EpmloyeeSalaries { get; set; }
     }
 }

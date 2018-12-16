@@ -29,5 +29,7 @@ namespace Point_Of_Sale.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Point_Of_Sale.Models.LoginModel> LoginModels { get; set; }
     }
 }

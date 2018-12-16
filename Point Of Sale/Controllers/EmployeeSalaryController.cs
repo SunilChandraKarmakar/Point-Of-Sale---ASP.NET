@@ -10,31 +10,31 @@ using Point_Of_Sale;
 
 namespace Point_Of_Sale.Controllers
 {
-    public class ProductImageController : Controller
+    public class EmployeeSalaryController : Controller
     {
         private POS_WebEntities db = new POS_WebEntities();
 
-        // GET: ProductImage
+        // GET: EmployeeSalary
         public ActionResult Index()
         {
             if (Session["type"] == null || Session["type"].ToString() == "")
             {
                 Session["DefaultView"] = "Index";
-                Session["DefaultControll"] = "ProductImage";
+                Session["DefaultControll"] = "EmployeeSalary";
                 return RedirectToAction("Login", "Employee");
             }
 
-            var productImages = db.ProductImages.Include(p => p.Product);
-            return View(productImages.ToList());
+            var epmloyeeSalaries = db.EpmloyeeSalaries.Include(e => e.Employee);
+            return View(epmloyeeSalaries.ToList());
         }
 
-        // GET: ProductImage/Details/5
+        // GET: EmployeeSalary/Details/5
         public ActionResult Details(int? id)
         {
             if (Session["type"] == null || Session["type"].ToString() == "")
             {
                 Session["DefaultView"] = "Details";
-                Session["DefaultControll"] = "ProductImage";
+                Session["DefaultControll"] = "EmployeeSalary";
                 return RedirectToAction("Login", "Employee");
             }
 
@@ -42,63 +42,60 @@ namespace Point_Of_Sale.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductImage productImage = db.ProductImages.Find(id);
-            if (productImage == null)
+            EpmloyeeSalary epmloyeeSalary = db.EpmloyeeSalaries.Find(id);
+            if (epmloyeeSalary == null)
             {
                 return HttpNotFound();
             }
-            return View(productImage);
+            return View(epmloyeeSalary);
         }
 
-        // GET: ProductImage/Create
+        // GET: EmployeeSalary/Create
         public ActionResult Create()
         {
             if (Session["type"] == null || Session["type"].ToString() == "")
             {
                 Session["DefaultView"] = "Create";
-                Session["DefaultControll"] = "ProductImage";
+                Session["DefaultControll"] = "EmployeeSalary";
                 return RedirectToAction("Login", "Employee");
             }
 
-            ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductName");
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "EmployeeName");
             return View();
         }
 
-        // POST: ProductImage/Create
+        // POST: EmployeeSalary/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ProductImage productImage, HttpPostedFileBase PI)
+        public ActionResult Create([Bind(Include = "ID,EmployeeID,EmployeeSalary,SalaryMonth,SalaryReciveDate")] EpmloyeeSalary epmloyeeSalary)
         {
             if (Session["type"] == null || Session["type"].ToString() == "")
             {
                 Session["DefaultView"] = "Create";
-                Session["DefaultControll"] = "ProductImage";
+                Session["DefaultControll"] = "EmployeeSalary";
                 return RedirectToAction("Login", "Employee");
             }
 
-            productImage.ProductImage1 = System.IO.Path.GetFileName(PI.FileName);
-
             if (ModelState.IsValid)
             {
-                db.ProductImages.Add(productImage);
+                db.EpmloyeeSalaries.Add(epmloyeeSalary);
                 db.SaveChanges();
-                PI.SaveAs(Server.MapPath("../Images/ProductImage/" + productImage.ID.ToString() + "_" + productImage.ProductImage1));
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductName", productImage.ProductID);
-            return View(productImage);
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "EmployeeName", epmloyeeSalary.EmployeeID);
+            return View(epmloyeeSalary);
         }
 
-        // GET: ProductImage/Edit/5
+        // GET: EmployeeSalary/Edit/5
         public ActionResult Edit(int? id)
         {
             if (Session["type"] == null || Session["type"].ToString() == "")
             {
                 Session["DefaultView"] = "Edit";
-                Session["DefaultControll"] = "ProductImage";
+                Session["DefaultControll"] = "EmployeeSalary";
                 return RedirectToAction("Login", "Employee");
             }
 
@@ -106,50 +103,46 @@ namespace Point_Of_Sale.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductImage productImage = db.ProductImages.Find(id);
-            if (productImage == null)
+            EpmloyeeSalary epmloyeeSalary = db.EpmloyeeSalaries.Find(id);
+            if (epmloyeeSalary == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductName", productImage.ProductID);
-            return View(productImage);
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "EmployeeName", epmloyeeSalary.EmployeeID);
+            return View(epmloyeeSalary);
         }
 
-        // POST: ProductImage/Edit/5
+        // POST: EmployeeSalary/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ProductImage productImage, HttpPostedFileBase PI)
+        public ActionResult Edit([Bind(Include = "ID,EmployeeID,EmployeeSalary,SalaryMonth,SalaryReciveDate")] EpmloyeeSalary epmloyeeSalary)
         {
             if (Session["type"] == null || Session["type"].ToString() == "")
             {
                 Session["DefaultView"] = "Edit";
-                Session["DefaultControll"] = "ProductImage";
+                Session["DefaultControll"] = "EmployeeSalary";
                 return RedirectToAction("Login", "Employee");
             }
 
-            productImage.ProductImage1 = System.IO.Path.GetFileName(PI.FileName);
-
             if (ModelState.IsValid)
             {
-                db.Entry(productImage).State = EntityState.Modified;
+                db.Entry(epmloyeeSalary).State = EntityState.Modified;
                 db.SaveChanges();
-                PI.SaveAs(Server.MapPath("../Images/ProductImage/UpdateProductImage/" + productImage.ID.ToString() + "_" + productImage.ProductImage1));
                 return RedirectToAction("Index");
             }
-
-            ViewBag.ProductID = new SelectList(db.Products, "ID", "ProductName", productImage.ProductID);
-            return View(productImage);
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "EmployeeName", epmloyeeSalary.EmployeeID);
+            return View(epmloyeeSalary);
         }
 
-        // GET: ProductImage/Delete/5
+        // GET: EmployeeSalary/Delete/5
         public ActionResult Delete(int? id)
         {
             if (Session["type"] == null || Session["type"].ToString() == "")
             {
                 Session["DefaultView"] = "Delete";
-                Session["DefaultControll"] = "ProductImage";
+                Session["DefaultControll"] = "EmployeeSalary";
                 return RedirectToAction("Login", "Employee");
             }
 
@@ -157,28 +150,28 @@ namespace Point_Of_Sale.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductImage productImage = db.ProductImages.Find(id);
-            if (productImage == null)
+            EpmloyeeSalary epmloyeeSalary = db.EpmloyeeSalaries.Find(id);
+            if (epmloyeeSalary == null)
             {
                 return HttpNotFound();
             }
-            return View(productImage);
+            return View(epmloyeeSalary);
         }
 
-        // POST: ProductImage/Delete/5
+        // POST: EmployeeSalary/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             if (Session["type"] == null || Session["type"].ToString() == "")
             {
-                Session["DefaultView"] = "DeleteConfirmed";
-                Session["DefaultControll"] = "ProductImage";
+                Session["DefaultView"] = "Delete";
+                Session["DefaultControll"] = "EmployeeSalary";
                 return RedirectToAction("Login", "Employee");
             }
 
-            ProductImage productImage = db.ProductImages.Find(id);
-            db.ProductImages.Remove(productImage);
+            EpmloyeeSalary epmloyeeSalary = db.EpmloyeeSalaries.Find(id);
+            db.EpmloyeeSalaries.Remove(epmloyeeSalary);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

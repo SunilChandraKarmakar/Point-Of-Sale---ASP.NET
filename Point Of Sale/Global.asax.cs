@@ -17,5 +17,14 @@ namespace Point_Of_Sale
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Session_Start()
+        {
+            Session["Id"] = "";
+            Session["EmployeeName"] = "";
+            Session["type"] = "";
+            Session["DefaultView"] = "Index";
+            Session["DefaultControll"] = "Home";
+        }
     }
 }

@@ -35,7 +35,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CountryName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -59,6 +59,16 @@
           </Key>
           <Property Name="EmployeeID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="EpmloyeeSalary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="EmployeeSalary" Type="float" Nullable="false" />
+          <Property Name="SalaryMonth" Type="date" Nullable="false" />
+          <Property Name="SalaryReciveDate" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ID" />
@@ -78,7 +88,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
-          <Property Name="ProductImage" Type="varchar" MaxLength="2000" />
+          <Property Name="ProductImage" Type="varchar" MaxLength="1000" />
           <Property Name="ProductTitle" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ProductPrice">
@@ -146,6 +156,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__EpmloyeeS__Emplo__5EBF139D">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EpmloyeeSalary" Type="Self.EpmloyeeSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EpmloyeeSalary">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Product__BrandID__5441852A">
           <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -201,6 +223,7 @@
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeAdmin" EntityType="Self.EmployeeAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EpmloyeeSalary" EntityType="Self.EpmloyeeSalary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPrice" EntityType="Self.ProductPrice" Schema="dbo" store:Type="Tables" />
@@ -220,6 +243,10 @@
           <AssociationSet Name="FK__EmployeeA__Emplo__4222D4EF" Association="Self.FK__EmployeeA__Emplo__4222D4EF">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="EmployeeAdmin" EntitySet="EmployeeAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EpmloyeeS__Emplo__5EBF139D" Association="Self.FK__EpmloyeeS__Emplo__5EBF139D">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EpmloyeeSalary" EntitySet="EpmloyeeSalary" />
           </AssociationSet>
           <AssociationSet Name="FK__Product__BrandID__5441852A" Association="Self.FK__Product__BrandID__5441852A">
             <End Role="Brand" EntitySet="Brand" />
@@ -257,7 +284,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CountryName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CountryName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cities" Relationship="Self.FK__City__CountryID__3A81B327" FromRole="Country" ToRole="City" />
         </EntityType>
         <EntityType Name="Employee">
@@ -277,6 +304,7 @@
           <Property Name="EmployeePicture" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="City" Relationship="Self.FK__Employee__Employ__3F466844" FromRole="Employee" ToRole="City" />
           <NavigationProperty Name="EmployeeAdmin" Relationship="Self.FK__EmployeeA__Emplo__4222D4EF" FromRole="Employee" ToRole="EmployeeAdmin" />
+          <NavigationProperty Name="EpmloyeeSalaries" Relationship="POS_WebModel.FK__EpmloyeeS__Emplo__5EBF139D" FromRole="Employee" ToRole="EpmloyeeSalary" />
         </EntityType>
         <EntityType Name="EmployeeAdmin">
           <Key>
@@ -363,6 +391,11 @@
           <AssociationSet Name="FK__ProductIm__Produ__59FA5E80" Association="POS_WebModel.FK__ProductIm__Produ__59FA5E80">
             <End Role="Product" EntitySet="Products" />
             <End Role="ProductImage" EntitySet="ProductImages" />
+          </AssociationSet>
+          <EntitySet Name="EpmloyeeSalaries" EntityType="POS_WebModel.EpmloyeeSalary" />
+          <AssociationSet Name="FK__EpmloyeeS__Emplo__5EBF139D" Association="POS_WebModel.FK__EpmloyeeS__Emplo__5EBF139D">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EpmloyeeSalary" EntitySet="EpmloyeeSalaries" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Brand">
@@ -475,7 +508,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="ProductImage1" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="ProductImage1" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="ProductTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Product" Relationship="POS_WebModel.FK__ProductIm__Produ__59FA5E80" FromRole="ProductImage" ToRole="Product" />
         </EntityType>
@@ -488,6 +521,29 @@
             </Principal>
             <Dependent Role="ProductImage">
               <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EpmloyeeSalary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeSalary" Type="Double" Nullable="false" />
+          <Property Name="SalaryMonth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SalaryReciveDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Employee" Relationship="POS_WebModel.FK__EpmloyeeS__Emplo__5EBF139D" FromRole="EpmloyeeSalary" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK__EpmloyeeS__Emplo__5EBF139D">
+          <End Type="POS_WebModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="POS_WebModel.EpmloyeeSalary" Role="EpmloyeeSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EpmloyeeSalary">
+              <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -596,6 +652,17 @@
                 <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
                 <ScalarProperty Name="ProductImage1" ColumnName="ProductImage" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EpmloyeeSalaries">
+            <EntityTypeMapping TypeName="POS_WebModel.EpmloyeeSalary">
+              <MappingFragment StoreEntitySet="EpmloyeeSalary">
+                <ScalarProperty Name="SalaryReciveDate" ColumnName="SalaryReciveDate" />
+                <ScalarProperty Name="SalaryMonth" ColumnName="SalaryMonth" />
+                <ScalarProperty Name="EmployeeSalary" ColumnName="EmployeeSalary" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

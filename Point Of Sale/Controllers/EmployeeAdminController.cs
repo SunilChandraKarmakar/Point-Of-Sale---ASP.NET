@@ -17,13 +17,27 @@ namespace Point_Of_Sale.Controllers
         // GET: EmployeeAdmin
         public ActionResult Index()
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Index";
+                Session["DefaultControll"] = "EmployeeAdmin";
+                return RedirectToAction("Login", "Employee");
+            }
+
             var employeeAdmins = db.EmployeeAdmins.Include(e => e.Employee);
-            return View(employeeAdmins.ToList());
+            return View(employeeAdmins);
         }
 
         // GET: EmployeeAdmin/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Details";
+                Session["DefaultControll"] = "EmployeeAdmin";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +53,13 @@ namespace Point_Of_Sale.Controllers
         // GET: EmployeeAdmin/Create
         public ActionResult Create()
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Details";
+                Session["DefaultControll"] = "EmployeeAdmin";
+                return RedirectToAction("Login", "Employee");
+            }
+
             ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "EmployeeName");
             return View();
         }
@@ -50,6 +71,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EmployeeID")] EmployeeAdmin employeeAdmin)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Create";
+                Session["DefaultControll"] = "EmployeeAdmin";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (ModelState.IsValid)
             {
                 db.EmployeeAdmins.Add(employeeAdmin);
@@ -64,6 +92,13 @@ namespace Point_Of_Sale.Controllers
         // GET: EmployeeAdmin/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Edit";
+                Session["DefaultControll"] = "EmployeeAdmin";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -84,6 +119,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "EmployeeID")] EmployeeAdmin employeeAdmin)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Edit";
+                Session["DefaultControll"] = "EmployeeAdmin";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(employeeAdmin).State = EntityState.Modified;
@@ -97,6 +139,13 @@ namespace Point_Of_Sale.Controllers
         // GET: EmployeeAdmin/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Edit";
+                Session["DefaultControll"] = "EmployeeAdmin";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -114,6 +163,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Edit";
+                Session["DefaultControll"] = "EmployeeAdmin";
+                return RedirectToAction("Login", "Employee");
+            }
+
             EmployeeAdmin employeeAdmin = db.EmployeeAdmins.Find(id);
             db.EmployeeAdmins.Remove(employeeAdmin);
             db.SaveChanges();

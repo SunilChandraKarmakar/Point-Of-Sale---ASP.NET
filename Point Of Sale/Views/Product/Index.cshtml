@@ -1,49 +1,47 @@
-﻿@model IEnumerable<Point_Of_Sale.Product>
+﻿@*@model IEnumerable<Point_Of_Sale.Product>*@
+@model Point_Of_Sale.Product
 
 @{
     ViewBag.Title = "Index";
+    var ProductList = ViewBag.ProductList as IEnumerable<Point_Of_Sale.Product>;
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Product Dashboard</u></h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-           Product Info
-        </th>
-        <th>
-           Other Info
-        </th>
-        <th>
-           Product Details
-        </th>
-        <th></th>
-    </tr>
+<p style="margin-bottom:30px;">@Html.ActionLink("Create New", "Create")</p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            Name : @Html.DisplayFor(modelItem => item.ProductName)<br />
-            Code : @Html.DisplayFor(modelItem => item.ProductCode)<br />
-            Quentity : @Html.DisplayFor(modelItem => item.ProductQuentity)<br />
-        </td>
-        <td>
-           Discription : @Html.DisplayFor(modelItem => item.ProductDescription)<br />
-           Position : @Html.DisplayFor(modelItem => item.ProductPosition)<br />
-        </td>
-        <td>
-            Brand : @Html.DisplayFor(modelItem => item.Brand.BrandName)<br />
-            Category : @Html.DisplayFor(modelItem => item.Category.CategoryName)<br />
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>Product Info</th>
+            <th>Other Info</th>
+            <th>Product Details</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in ProductList)
+    {
+        <tr>
+            <td>
+                Name : @Html.DisplayFor(modelItem => item.ProductName)<br />
+                Code : @Html.DisplayFor(modelItem => item.ProductCode)<br />
+                Quentity : @Html.DisplayFor(modelItem => item.ProductQuentity)<br />
+            </td>
+            <td>
+                Discription : @Html.DisplayFor(modelItem => item.ProductDescription)<br />
+                Position : @Html.DisplayFor(modelItem => item.ProductPosition)<br />
+            </td>
+            <td>
+                Brand : @Html.DisplayFor(modelItem => item.Brand.BrandName)<br />
+                Category : @Html.DisplayFor(modelItem => item.Category.CategoryName)<br />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>

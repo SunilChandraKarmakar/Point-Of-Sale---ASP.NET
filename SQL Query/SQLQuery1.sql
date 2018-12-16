@@ -90,3 +90,13 @@ create table ProductImage
 	ProductTitle varchar(50),
 	foreign key (ProductID) references Product(ID)
 )
+
+create table EpmloyeeSalary
+(
+	ID int identity primary key,
+	EmployeeID int not null,
+	EmployeeSalary float not null,
+	SalaryMonth date not null,
+	SalaryReciveDate date not null,
+	foreign key (EmployeeID) references Employee(ID)
+)

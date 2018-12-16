@@ -23,6 +23,8 @@
         <AssociationConnector Association="POS_WebModel.FK__ProductPr__Produ__571DF1D5" />
         <EntityTypeShape EntityType="POS_WebModel.ProductImage" Width="1.5" PointX="9.875" PointY="8.625" />
         <AssociationConnector Association="POS_WebModel.FK__ProductIm__Produ__59FA5E80" />
+        <EntityTypeShape EntityType="POS_WebModel.EpmloyeeSalary" Width="1.5" PointX="7.5" PointY="9.75" />
+        <AssociationConnector Association="POS_WebModel.FK__EpmloyeeS__Emplo__5EBF139D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

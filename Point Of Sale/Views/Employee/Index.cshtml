@@ -4,28 +4,23 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Employee Dashboard</u></h2>
 
-<p>
+<p style="margin-bottom:30px;">
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-           Basic Info
-        </th>
-        <th>
-           Other Info
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeePicture)
-        </th>
-        
-        <th></th>
-    </tr>
+
+
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>Basic Info</th>
+            <th>Other Info</th>
+            <th>Employee Address</th>
+            <th>Employee Picture</th>
+            <th>Action</th>
+        </tr>
+    </thead>
 
 @foreach (var item in Model) {
     <tr>

@@ -17,13 +17,28 @@ namespace Point_Of_Sale.Controllers
         // GET: Product
         public ActionResult Index()
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Index";
+                Session["DefaultControll"] = "Product";
+                return RedirectToAction("Login", "Employee");
+            } 
+
+            ViewBag.ProductList = db.Products.ToList();
             var products = db.Products.Include(p => p.Brand).Include(p => p.Category);
-            return View(products.ToList());
+            return View();
         }
 
         // GET: Product/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Details";
+                Session["DefaultControll"] = "Product";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +54,13 @@ namespace Point_Of_Sale.Controllers
         // GET: Product/Create
         public ActionResult Create()
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Create";
+                Session["DefaultControll"] = "Product";
+                return RedirectToAction("Login", "Employee");
+            }
+
             ViewBag.BrandID = new SelectList(db.Brands, "ID", "BrandName");
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "CategoryName");
             return View();
@@ -51,6 +73,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,ProductName,ProductCode,ProductQuentity,ProductDescription,ProductPosition,CategoryID,BrandID")] Product product)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Create";
+                Session["DefaultControll"] = "Product";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Products.Add(product);
@@ -66,6 +95,13 @@ namespace Point_Of_Sale.Controllers
         // GET: Product/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Edit";
+                Session["DefaultControll"] = "Product";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,6 +123,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ProductName,ProductCode,ProductQuentity,ProductDescription,ProductPosition,CategoryID,BrandID")] Product product)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Edit";
+                Session["DefaultControll"] = "Product";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
@@ -101,6 +144,13 @@ namespace Point_Of_Sale.Controllers
         // GET: Product/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "Delete";
+                Session["DefaultControll"] = "Product";
+                return RedirectToAction("Login", "Employee");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,6 +168,13 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                Session["DefaultView"] = "DeleteConfirmed";
+                Session["DefaultControll"] = "Product";
+                return RedirectToAction("Login", "Employee");
+            }
+
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();

@@ -185,12 +185,14 @@
       <DependentUpon>POS_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminEmployeeLoginController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\EmployeeAdminController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\EmployeeSalaryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -206,11 +208,15 @@
     <Compile Include="EmployeeAdmin.cs">
       <DependentUpon>POS_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="EpmloyeeSalary.cs">
+      <DependentUpon>POS_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="POS_Model.Context.cs">
       <AutoGen>True</AutoGen>
@@ -243,6 +249,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -365,6 +372,16 @@
     <Content Include="Views\ProductImage\Details.cshtml" />
     <Content Include="Views\ProductImage\Edit.cshtml" />
     <Content Include="Views\ProductImage\Index.cshtml" />
+    <Content Include="Views\EmployeeSalary\Create.cshtml" />
+    <Content Include="Views\EmployeeSalary\Delete.cshtml" />
+    <Content Include="Views\EmployeeSalary\Details.cshtml" />
+    <Content Include="Views\EmployeeSalary\Edit.cshtml" />
+    <Content Include="Views\EmployeeSalary\Index.cshtml" />
+    <Content Include="Views\AdminEmployeeLogin\Index.cshtml" />
+    <Content Include="Views\AdminEmployeeLogin\AfterLogin.cshtml" />
+    <Content Include="Views\Employee\Logout.cshtml" />
+    <Content Include="Views\Employee\Login.cshtml" />
+    <Content Include="Views\Employee\MyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

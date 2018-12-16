@@ -11,7 +11,9 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+
     public partial class Country
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +21,7 @@ namespace Point_Of_Sale
         {
             this.Cities = new HashSet<City>();
         }
-    
+
         public int ID { get; set; }
         public string CountryName { get; set; }
     

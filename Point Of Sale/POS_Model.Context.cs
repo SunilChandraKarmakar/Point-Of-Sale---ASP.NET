@@ -35,5 +35,6 @@ namespace Point_Of_Sale
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductPrice> ProductPrices { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<EpmloyeeSalary> EpmloyeeSalaries { get; set; }
     }
 }

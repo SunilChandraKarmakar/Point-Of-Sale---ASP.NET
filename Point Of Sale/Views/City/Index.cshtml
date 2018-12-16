@@ -1,39 +1,49 @@
-﻿@model IEnumerable<Point_Of_Sale.City>
+﻿@*@model IEnumerable<Point_Of_Sale.City>*@
+@model Point_Of_Sale.City
 
 @{
     ViewBag.Title = "Index";
+    var CityList = ViewBag.CityList as IEnumerable<Point_Of_Sale.City>;
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>City Dashboard</u></h2>
 
-<p>
+<p style="margin-bottom:30px;">
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CityName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country.CountryName)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CityName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country.CountryName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+@*Create code hare*@
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createButton" style="margin-bottom:50px;">
+    Create New City
+</button>*@
+
+
+@*DataTable code hare*@
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>City Name</th>
+            <th>Country Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in CityList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.CountryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
