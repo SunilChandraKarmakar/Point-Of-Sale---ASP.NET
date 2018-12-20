@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    var CaregoryList = ViewBag.CategoryList as IEnumerable<Point_Of_Sale.Category>;
+}
+
+<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Master Details Entry Form Dashboard</u></h2>
+
+<div class="container">
+    <div class="master">
+        <h2>Order</h2>
+        <table class="table table-responsive">
+            <tr>
+                <td>Order No</td>
+                <td>
+                    <input type="text" class="form-control" id="orderNo" />
+                    <span class="error">Order no required</span>
+                </td>
+                <td>Order Date</td>
+                <td>
+                    <input type="text" class="form-control" id="orderDate" />
+                    <span class="error">Valid order date required (ex: MM-dd-yyyy)</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td colspan="3">
+                    <textarea id="description" class="form-control"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="details">
+        <h2>Order Item</h2>
+        <table class="table table-responsive">
+            <tr>
+                <td>Category</td>
+                <td>Product</td>
+                <td>Quentity</td>
+                <td>Rate</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr class="mycontainer" id="mainrow">
+                <td>
+                    <select id="productCategory" class="form-control">
+                        <option>Select</option>
+                        @foreach (var item in CaregoryList)
+                        {
+                            <option value="@item.ID">@item.CategoryName</option>
+                        }
+                    </select>
+                    <span class="error">Select Category</span>
+                </td>
+                <td>
+                    <select id="product" class="product form-control">
+                        <option>Select Product</option>
+                    </select>
+                    <span class="error">Select Product</span>
+                </td>
+                <td>
+                    <input type="text" id="quantity" class="quantity form-control" />
+                    <span class="error">Valid quentity required</span>
+                </td>
+                <td>
+                    <input type="text" id="rate" class="rate form-control" />
+                    <span class="error">Required rate</span>
+                </td>
+                <td>
+                    <input type="button" id="add" class="btn btn-success" value="add" style="width:80px" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="orderItems">
+        <table class="table table-responsive" id="orderdetailsItems"></table>
+        <span id="orderItemError" style="color:red"></span>
+    </div>
+    <div style="padding:10px 0; text-align:right">
+        <input id="submit" type="button" value="Save Order" class="btn btn-warning" style="padding:10px 20px" />
+    </div>
+</div>
+
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/myScripts.js"></script>
+
+@*This Code for date picker*@
+<script type="text/javascript">
+    $(function () {
+        $('#orderDate').datepicker({
+            dateFormat: 'mm-dd-yy'
+        })
+    })
+</script>
+
+@*This code for error and validation style-color*@
+<style>
+    span.error {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    tr.error {
+        background-color: rgba(255,0,0,0.35);
+    }
+</style>
+

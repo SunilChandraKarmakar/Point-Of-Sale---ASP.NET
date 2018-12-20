@@ -24,8 +24,9 @@ namespace Point_Of_Sale.Controllers
                 return RedirectToAction("Login", "Employee");
             }
 
+            ViewBag.ProductImageList = db.ProductImages.ToList();
             var productImages = db.ProductImages.Include(p => p.Product);
-            return View(productImages.ToList());
+            return View();
         }
 
         // GET: ProductImage/Details/5

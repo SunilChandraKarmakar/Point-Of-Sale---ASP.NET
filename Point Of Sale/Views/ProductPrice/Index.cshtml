@@ -1,32 +1,32 @@
-﻿@model IEnumerable<Point_Of_Sale.ProductPrice>
+﻿@*@model IEnumerable<Point_Of_Sale.ProductPrice>*@
+@model Point_Of_Sale.ProductPrice
 
 @{
     ViewBag.Title = "Index";
+    var ProductPrice = ViewBag.ProductPrice as IEnumerable<Point_Of_Sale.ProductPrice>;
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Product Price Dashboard</u></h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductPrice1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Product.ProductName)
-        </th>
-        <th></th>
-    </tr>
+<p style="margin-bottom:30px;">@Html.ActionLink("Create New", "Create")</p>
 
-@foreach (var item in Model) {
+
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+@foreach (var item in ProductPrice) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductPrice1)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Product.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductPrice1)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

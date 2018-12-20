@@ -24,8 +24,9 @@ namespace Point_Of_Sale.Controllers
                 return RedirectToAction("Login", "Employee");
             }
 
+            ViewBag.ProductPrice = db.ProductPrices.ToList();
             var productPrices = db.ProductPrices.Include(p => p.Product);
-            return View(productPrices.ToList());
+            return View();
         }
 
         // GET: ProductPrice/Details/5

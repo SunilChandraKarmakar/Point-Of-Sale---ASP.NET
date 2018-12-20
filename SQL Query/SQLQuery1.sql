@@ -100,3 +100,42 @@ create table EpmloyeeSalary
 	SalaryReciveDate date not null,
 	foreign key (EmployeeID) references Employee(ID)
 )
+
+--create table Customer
+--(
+--	ID int identity primary key,
+--	OrderNo varchar(200) not null unique,
+--	OrderDate date not null,
+--	Description varchar(500)
+--)
+
+--create table Purchase
+--(
+--	ID int identity primary key,
+--	CustomerID int not null,
+--	CategoryID int not null,
+--	ProductID int not null,
+--	Quantity int not null,
+--	Rate float not null,
+--	foreign key (CustomerID) references Customer(ID),
+--	foreign key (CategoryID) references Category(ID),
+--	foreign key (ProductID) references Product(ID)
+--)
+
+create table [Order]
+(
+	ID int identity primary key,
+	OrderDate date,
+)
+
+create table OrderDetails
+(
+	ID int identity primary key,
+	OrderID int,
+	ProductID int,
+	Price decimal,
+	Quantity int,
+	TotalPrice decimal,
+	foreign key (OrderID) references [Order] (ID),
+	foreign key (ProductID) references Product (ID)
+)

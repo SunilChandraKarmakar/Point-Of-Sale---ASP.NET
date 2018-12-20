@@ -1,29 +1,27 @@
-﻿@model IEnumerable<Point_Of_Sale.ProductImage>
+﻿@*@model IEnumerable<Point_Of_Sale.ProductImage>*@
+@model Point_Of_Sale.ProductImage
 
 @{
     ViewBag.Title = "Index";
+    var ProductImageList = ViewBag.ProductImageList as IEnumerable<Point_Of_Sale.ProductImage>;
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Product Image Dashboard</u></h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Product.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductImage1)
-        </th>
-        <th></th>
-    </tr>
+<p style="margin-bottom:30px;">@Html.ActionLink("Create New", "Create")</p>
 
-@foreach (var item in Model) {
+
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Title</th>
+            <th>Product Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+@foreach (var item in ProductImageList) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Product.ProductName)

@@ -12,18 +12,18 @@ namespace Point_Of_Sale
     using System;
     using System.Collections.Generic;
     
-    public partial class Country
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Country()
+        public Order()
         {
-            this.Cities = new HashSet<City>();
+            this.OrderDetails = new HashSet<OrderDetail>();
         }
     
         public int ID { get; set; }
-        public string CountryName { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<City> Cities { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

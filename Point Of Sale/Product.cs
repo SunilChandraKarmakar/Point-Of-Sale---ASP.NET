@@ -19,6 +19,7 @@ namespace Point_Of_Sale
         {
             this.ProductPrices = new HashSet<ProductPrice>();
             this.ProductImages = new HashSet<ProductImage>();
+            this.OrderDetails = new HashSet<OrderDetail>();
         }
     
         public int ID { get; set; }
@@ -36,5 +37,7 @@ namespace Point_Of_Sale
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

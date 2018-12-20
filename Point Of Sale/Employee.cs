@@ -11,8 +11,7 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,8 +27,6 @@ namespace Point_Of_Sale
         public string EmployeePassword { get; set; }
         public bool EmployeeGender { get; set; }
         public System.DateTime EmployeeJoinDate { get; set; }
-
-        [DataType (DataType.Date)]
         public System.DateTime EmployeeDateOfBirth { get; set; }
         public string EmployeeAddress { get; set; }
         public int EmployeeCityID { get; set; }

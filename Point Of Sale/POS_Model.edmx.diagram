@@ -25,6 +25,13 @@
         <AssociationConnector Association="POS_WebModel.FK__ProductIm__Produ__59FA5E80" />
         <EntityTypeShape EntityType="POS_WebModel.EpmloyeeSalary" Width="1.5" PointX="7.5" PointY="9.75" />
         <AssociationConnector Association="POS_WebModel.FK__EpmloyeeS__Emplo__5EBF139D" />
+        <EntityTypeShape EntityType="POS_WebModel.Customer" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="POS_WebModel.Purchase" Width="1.5" PointX="3" PointY="9.625" />
+        <AssociationConnector Association="POS_WebModel.FK__Purchase__Custom__7D439ABD" />
+        <EntityTypeShape EntityType="POS_WebModel.Order" Width="1.5" PointX="10.625" PointY="3" />
+        <EntityTypeShape EntityType="POS_WebModel.OrderDetail" Width="1.5" PointX="12.875" PointY="5.5" />
+        <AssociationConnector Association="POS_WebModel.FK__OrderDeta__Order__02084FDA" />
+        <AssociationConnector Association="POS_WebModel.FK__OrderDeta__Produ__02FC7413" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
