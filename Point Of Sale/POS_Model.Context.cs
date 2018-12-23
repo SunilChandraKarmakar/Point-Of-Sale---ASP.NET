@@ -38,7 +38,5 @@ namespace Point_Of_Sale
         public virtual DbSet<EpmloyeeSalary> EpmloyeeSalaries { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Purchase> Purchases { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

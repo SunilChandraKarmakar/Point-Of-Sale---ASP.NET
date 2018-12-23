@@ -189,16 +189,15 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\CustomerAndPurchaseController.cs" />
     <Compile Include="Controllers\EmployeeAdminController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeSalaryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductImageController.cs" />
     <Compile Include="Controllers\ProductPriceController.cs" />
-    <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Country.cs">
       <DependentUpon>POS_Model.tt</DependentUpon>
@@ -215,7 +214,6 @@
     <Compile Include="EpmloyeeSalary.cs">
       <DependentUpon>POS_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Extended Model\Customer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -223,13 +221,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\OrderViewModel.cs" />
-    <Compile Include="Order.cs">
-      <DependentUpon>POS_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OrderDetail.cs">
-      <DependentUpon>POS_Model.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\CustomerAndPurchaseViewModel.cs" />
     <Compile Include="POS_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -293,6 +285,7 @@
       <DependentUpon>POS_Model.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\CustomerAndPurchaseScript.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -303,7 +296,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\myScripts.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -396,13 +388,12 @@
     <Content Include="Views\Employee\Logout.cshtml" />
     <Content Include="Views\Employee\Login.cshtml" />
     <Content Include="Views\Employee\MyAccount.cshtml" />
-    <Content Include="Views\Purchase\Index.cshtml" />
+    <Content Include="Views\CustomerAndPurchase\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\ProductImage\" />
     <Folder Include="Images\Uploads\" />
-    <Folder Include="Views\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

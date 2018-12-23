@@ -1,0 +1,71 @@
+﻿@using Point_Of_Sale.Models
+@model Point_Of_Sale.Models.CustomerAndPurchaseViewModel
+
+@{
+    ViewBag.Title = "Index";
+    POS_WebEntities db = new POS_WebEntities();
+    SelectList ProductList = new SelectList(db.Products, "ID", "ProductName");
+}
+
+<h2>Index</h2>
+
+<div class="form-horizontal">
+    <h2>Coustomer Information</h2>
+    <table class="table table-responsive">
+        <tr>
+            <th>Coustomer Name</th>
+            <td><input type="text" id="customer_name" class="form-control" /></td>
+
+            <th>Order Number</th>
+            <td><input type="text" id="order_number" class="form-control" /></td>
+
+            <th>Order Date</th>
+            <td><input type="date" id="date" class="form-control" /></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td colspan="3">
+                <textarea id="description" class="form-control"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<h2>Purchase Information</h2>
+<table class="table table-responsive" id="tblItems">
+    <tr>
+        <th>Items</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+        <th></th>
+    </tr>
+    <tr id="MainRow">
+        <td>
+            @Html.DropDownList("productsItems", ProductList, "--Select--", new { @class = "productsItems form-control" })
+            <span class="error text-danger"></span>
+        </td>
+        <td>
+            <input type="text" id="price" class="price form-control" placeholder="Price" />
+            <span class="error text-danger"></span>
+        </td>
+        <td>
+            <input type="text" id="quantity" class="quantity form-control" placeholder="Quantity" />
+            <span class="error text-danger"></span>
+        </td>
+        <td>
+            <input type="text" id="total" class="total form-control" disabled="disabled" />
+        </td>
+        <td>
+            <button type="button" class="btn btn-success" id="add">Add</button>
+        </td>
+    </tr>
+</table>
+
+<h2>Purchase Order Items</h2>
+
+<table class="table table-responsive" id="OrderItems"></table>
+
+<button type="button" class="btn btn-primary" id="submit">Add Order</button>
+<span class="text-danger" id="orderMessage"></span>
+

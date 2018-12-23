@@ -17,9 +17,11 @@ namespace Point_Of_Sale
         public int ID { get; set; }
         public int CustomerID { get; set; }
         public int ProductID { get; set; }
+        public decimal Price { get; set; }
         public int Quantity { get; set; }
-        public decimal Rate { get; set; }
+        public Nullable<decimal> TotalPrice { get; set; }
     
         public virtual Customer Customer { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

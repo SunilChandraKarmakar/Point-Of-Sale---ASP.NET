@@ -5,14 +5,18 @@ using System.Web;
 
 namespace Point_Of_Sale.Models
 {
-    public class OrderViewModel
+    public class CustomerAndPurchaseViewModel
     {
+        public string CustomerName { get; set; }
+        public string OrderNumber { get; set; }
         public DateTime Date { get; set; }
-        public List<ListItems> Items { get; set; }
+        public string Description { get; set; }
+        
+        public List<PurchaseItem> Items { get; set; }
     }
 
-    public class ListItems
-    {
+    public class PurchaseItem
+    {                              
         public int ProductID { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
