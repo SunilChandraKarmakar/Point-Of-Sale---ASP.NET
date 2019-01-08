@@ -60,7 +60,7 @@ namespace Point_Of_Sale.Controllers
                 return RedirectToAction("Login", "Employee");
             }
 
-            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "EmployeeName");
+            ViewBag.EmployeeID = new SelectList(db.Employees.Where(employee=>employee.EmployeeAdmin == null), "ID", "EmployeeName");
             return View();
         }
 
@@ -85,7 +85,7 @@ namespace Point_Of_Sale.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "EmployeeName", employeeAdmin.EmployeeID);
+            ViewBag.EmployeeID = new SelectList(db.Employees.Where(employee=>employee.EmployeeAdmin == null), "ID", "EmployeeName", employeeAdmin.EmployeeID);
             return View(employeeAdmin);
         }
 
