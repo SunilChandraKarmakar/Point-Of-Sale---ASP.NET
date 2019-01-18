@@ -23,6 +23,7 @@ namespace Point_Of_Sale.Controllers
                 Session["DefaultControll"] = "Employee";
                 return RedirectToAction("Login");
             }
+
             var employees = db.Employees.Include(e => e.City).Include(e => e.EmployeeAdmin);
             return View(employees.ToList());
         }

@@ -1,0 +1,75 @@
+ <div class="container-fluid">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                @Html.ActionLink("Point Of Sale", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Employee", "Index", "Employee")</li>
+                                <li>@Html.ActionLink("Employee Salary", "Index", "EmployeeSalary")</li>
+                                <li>@Html.ActionLink("Employee Admin", "Index", "EmployeeAdmin")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">References <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Country", "Index", "Country")</li>
+                                <li>@Html.ActionLink("City", "Index", "City")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Product <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Brand", "Index", "Brand")</li>
+                                <li>@Html.ActionLink("Category", "Index", "Category")</li>
+                                <li>@Html.ActionLink("Unit", "Index", "Unit")</li>
+                                <li role="separator" class="divider"></li>
+                                <li>@Html.ActionLink("Product", "Index", "Product")</li>
+                                <li>@Html.ActionLink("Product Price", "Index", "ProductPrice")</li>
+                                <li>@Html.ActionLink("Product Image", "Index", "ProductImage")</li>
+                            </ul>
+                        </li>
+
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                    </ul>
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    @Html.Partial("_LoginPartial")
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+
+
+
+<div class="dropdown-menu show" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+
+
+
+working link
+https://www.youtube.com/watch?v=w-OHoD47VOA
+https://www.youtube.com/watch?v=0GD47agKvg0
+https://www.youtube.com/watch?v=wQZRC7vXT08
+
+https://www.youtube.com/watch?v=JrJMWHOAi0E 1:35:02
+
+12/12/2018 -> My project work is start.

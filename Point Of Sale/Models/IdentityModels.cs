@@ -31,5 +31,7 @@ namespace Point_Of_Sale.Models
         }
 
         public System.Data.Entity.DbSet<Point_Of_Sale.Models.LoginModel> LoginModels { get; set; }
+
+        public System.Data.Entity.DbSet<Point_Of_Sale.Customer> Customers { get; set; }
     }
 }

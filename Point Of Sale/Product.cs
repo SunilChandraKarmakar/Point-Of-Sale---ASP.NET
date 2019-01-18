@@ -11,7 +11,8 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,12 +24,39 @@ namespace Point_Of_Sale
         }
     
         public int ID { get; set; }
+
+        [Required]
+        [Display(Name = "Product Name")]
+        [StringLength(20, MinimumLength = 2)]
         public string ProductName { get; set; }
+
+        [Required]
+        [Display(Name = "Product Code")]
+        [StringLength(20,MinimumLength = 1)]
         public string ProductCode { get; set; }
+
+        [Required]
+        [Display(Name = "Quentity of Product")]
         public int ProductQuentity { get; set; }
+
+        [Required]
+        [Display(Name = "Description of Product")]
+        [DataType(DataType.MultilineText)]
+        [StringLength(50, MinimumLength = 2)]
         public string ProductDescription { get; set; }
+
+        [Required]
+        [Display(Name = "Position of Product")]
+        [DataType(DataType.MultilineText)]
+        [StringLength(50, MinimumLength = 2)]
         public string ProductPosition { get; set; }
+
+        [Required]
+        [Display(Name = "Category Name")]
         public int CategoryID { get; set; }
+
+        [Required]
+        [Display(Name = "Brand Name")]
         public int BrandID { get; set; }
     
         public virtual Brand Brand { get; set; }

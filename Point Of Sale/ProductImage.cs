@@ -11,12 +11,23 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ProductImage
     {
         public int ID { get; set; }
+
+        [Required]
+        [Display(Name = "Product Name")]
         public int ProductID { get; set; }
+
+        [Display(Name = "Image of Product")]
+        [DataType(DataType.ImageUrl)]
         public string ProductImage1 { get; set; }
+
+        [Required]
+        [Display(Name = "Product title")]
+        [StringLength (50, MinimumLength = 2)]
         public string ProductTitle { get; set; }
     
         public virtual Product Product { get; set; }

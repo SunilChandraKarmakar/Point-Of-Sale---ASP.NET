@@ -190,6 +190,7 @@
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\CustomerAndPurchaseController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeeAdminController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeSalaryController.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductImageController.cs" />
     <Compile Include="Controllers\ProductPriceController.cs" />
+    <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Country.cs">
       <DependentUpon>POS_Model.tt</DependentUpon>
@@ -389,6 +391,16 @@
     <Content Include="Views\Employee\Login.cshtml" />
     <Content Include="Views\Employee\MyAccount.cshtml" />
     <Content Include="Views\CustomerAndPurchase\Index.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Purchase\Create.cshtml" />
+    <Content Include="Views\Purchase\Delete.cshtml" />
+    <Content Include="Views\Purchase\Details.cshtml" />
+    <Content Include="Views\Purchase\Edit.cshtml" />
+    <Content Include="Views\Purchase\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

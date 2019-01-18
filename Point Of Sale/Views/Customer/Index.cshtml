@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Point_Of_Sale.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="text-align:center; color:chocolate; margin-bottom:30px; margin-bottom:50px;"><u>Customer Information Dashboard</u></h2>
+
+@*<p style="margin-bottom:30px;">
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Order Number</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
