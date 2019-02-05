@@ -25,7 +25,8 @@ namespace Point_Of_Sale
         [Display(Name = "Product Name")]
         public int ProductID { get; set; }
 
-      
+        [Required]
+        [Display (Name = "Price")]
         public decimal Price { get; set; }
 
         [Required]
