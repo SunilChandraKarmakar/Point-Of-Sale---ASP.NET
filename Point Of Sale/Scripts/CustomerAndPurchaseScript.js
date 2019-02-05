@@ -80,7 +80,7 @@ $(function () {
             isValid = false;
         }
 
-        var descriptionShow = $('#description').val();
+        var descriptionShow = $("#description").val();
 
         if (isValid) {
             var data = {

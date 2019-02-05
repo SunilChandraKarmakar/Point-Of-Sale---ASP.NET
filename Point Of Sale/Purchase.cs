@@ -25,10 +25,7 @@ namespace Point_Of_Sale
         [Display(Name = "Product Name")]
         public int ProductID { get; set; }
 
-        [Required]
-        [Display(Name = "Price")]
-        [DataType(DataType.Currency)]
-        [StringLength (50, MinimumLength = 2)]
+      
         public decimal Price { get; set; }
 
         [Required]

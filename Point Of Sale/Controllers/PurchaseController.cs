@@ -51,7 +51,7 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,CustomerID,ProductID,Price,Quantity,TotalPrice")] Purchase purchase)
         {
-            if (ModelState.IsValid)
+           if (ModelState.IsValid)
             {
                 db.Purchases.Add(purchase);
                 db.SaveChanges();
@@ -87,7 +87,7 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,CustomerID,ProductID,Price,Quantity,TotalPrice")] Purchase purchase)
         {
-            if (ModelState.IsValid)
+           if (ModelState.IsValid)
             {
                 db.Entry(purchase).State = EntityState.Modified;
                 db.SaveChanges();
@@ -118,7 +118,7 @@ namespace Point_Of_Sale.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Purchase purchase = db.Purchases.Find(id);
+           Purchase purchase = db.Purchases.Find(id);
             db.Purchases.Remove(purchase);
             db.SaveChanges();
             return RedirectToAction("Index");
