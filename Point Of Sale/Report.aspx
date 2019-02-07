@@ -11,7 +11,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <rsweb:ReportViewer ID="ReportViewer1" runat="server"></rsweb:ReportViewer>
+            <rsweb:ReportViewer ID="ReportViewer1" runat="server" Height="883px" Width="1183px"></rsweb:ReportViewer>
         </div>
     </form>
 </body>
