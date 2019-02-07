@@ -105,6 +105,8 @@ $(function () {
                         $('#orderMessage').text(data.message);
                         $("#submit").attr("disabled", false);
                         $("#submit").html('Submited');
+                        location.reload();
+                        window.open("../Report.aspx", "_blank");
                     }
                     else {
                         $('#orderMessage').text(data.message);
