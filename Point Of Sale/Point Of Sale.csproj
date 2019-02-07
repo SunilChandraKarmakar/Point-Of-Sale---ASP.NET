@@ -207,6 +207,11 @@
     <Compile Include="Customer.cs">
       <DependentUpon>POS_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>POS_Model.tt</DependentUpon>
     </Compile>
@@ -288,6 +293,17 @@
     </EntityDeploy>
     <Content Include="POS_Model.edmx.diagram">
       <DependentUpon>POS_Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\CustomerAndPurchaseScript.js" />
