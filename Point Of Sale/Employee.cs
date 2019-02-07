@@ -11,8 +11,7 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,55 +21,15 @@ namespace Point_Of_Sale
         }
     
         public int ID { get; set; }
-
-        [Required]
-        [Display (Name = "Name")]
-        [StringLength (30, MinimumLength = 2)]
         public string EmployeeName { get; set; }
-
-        [Required]
-        [Display (Name = "Contact")]
-        [StringLength (15, MinimumLength = 11)]
-        [DataType (DataType.PhoneNumber)]
         public string EmployeeContact { get; set; }
-
-        [Required]
-        [Display (Name = "Email")]
-        [DataType (DataType.EmailAddress)]
         public string EmployeeEmail { get; set; }
-
-        [Required]
-        [Display (Name = "Password")]
-        [StringLength (20, MinimumLength = 3)]
-        [DataType (DataType.Password)]
         public string EmployeePassword { get; set; }
-
-        [Required]
-        [Display (Name = "Gender")]
         public bool EmployeeGender { get; set; }
-
-        [Display (Name = "Join Date")]
-        [DataType (DataType.Date)]
         public System.DateTime EmployeeJoinDate { get; set; }
-
-        [Required]
-        [Display (Name = "Date Of Birth")]
-        [DataType (DataType.Date)]
         public System.DateTime EmployeeDateOfBirth { get; set; }
-
-        [Required]
-        [Display (Name = "Address")]
-        [StringLength (100, MinimumLength = 5)]
-        [DataType (DataType.MultilineText)]
         public string EmployeeAddress { get; set; }
-
-        [Required]
-        [Display (Name = "City")]
         public int EmployeeCityID { get; set; }
-
-        [Required]
-        [Display (Name = "Picture")]
-        [DataType (DataType.ImageUrl)]
         public string EmployeePicture { get; set; }
     
         public virtual City City { get; set; }

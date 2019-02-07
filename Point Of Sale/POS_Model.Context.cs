@@ -12,6 +12,8 @@ namespace Point_Of_Sale
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class POS_WebEntities : DbContext
     {
@@ -38,5 +40,10 @@ namespace Point_Of_Sale
         public virtual DbSet<EpmloyeeSalary> EpmloyeeSalaries { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Purchase> Purchases { get; set; }
+    
+        public virtual ObjectResult<ReportDetails_Result> ReportDetails()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReportDetails_Result>("ReportDetails");
+        }
     }
 }

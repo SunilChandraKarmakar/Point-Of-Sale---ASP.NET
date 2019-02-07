@@ -252,6 +252,9 @@
     <Compile Include="Purchase.cs">
       <DependentUpon>POS_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReportDetails_Result.cs">
+      <DependentUpon>POS_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Unit.cs">
       <DependentUpon>POS_Model.tt</DependentUpon>

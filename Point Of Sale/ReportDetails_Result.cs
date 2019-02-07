@@ -10,23 +10,20 @@
 namespace Point_Of_Sale
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class ReportDetails_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
-        {
-            this.Purchases = new HashSet<Purchase>();
-        }
-    
-        public int ID { get; set; }
+        public int InvoiceNo { get; set; }
         public string CustomerName { get; set; }
         public string OrderNumber { get; set; }
-        public System.DateTime Date { get; set; }
         public string Description { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Purchase> Purchases { get; set; }
+        public System.DateTime Date { get; set; }
+        public int ID { get; set; }
+        public int CustomerID { get; set; }
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
+        public Nullable<decimal> TotalPrice { get; set; }
     }
 }

@@ -11,8 +11,7 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class City
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,14 +21,7 @@ namespace Point_Of_Sale
         }
     
         public int ID { get; set; }
-
-        [Required]
-        [Display(Name = "City Name")]
-        [StringLength (15, MinimumLength = 3)]
         public string CityName { get; set; }
-
-        [Required]
-        [Display(Name = "Country Name")]
         public int CountryID { get; set; }
     
         public virtual Country Country { get; set; }

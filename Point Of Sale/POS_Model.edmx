@@ -261,6 +261,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ReportDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="POS_WebModelStoreContainer">
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -462,6 +463,7 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="Purchase" EntitySet="Purchases" />
           </AssociationSet>
+          <FunctionImport Name="ReportDetails" ReturnType="Collection(POS_WebModel.ReportDetails_Result)" />
           </EntityContainer>
         <EntityType Name="Brand">
           <Key>
@@ -661,6 +663,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="ReportDetails_Result">
+          <Property Type="Int32" Name="InvoiceNo" Nullable="false" />
+          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="OrderNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="CustomerID" Nullable="false" />
+          <Property Type="Int32" Name="ProductID" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="20" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -804,6 +820,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ReportDetails" FunctionName="POS_WebModel.Store.ReportDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="POS_WebModel.ReportDetails_Result">
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

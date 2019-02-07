@@ -11,8 +11,7 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Brand
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,15 +21,7 @@ namespace Point_Of_Sale
         }
     
         public int ID { get; set; }
-
-        [Required]
-        [Display (Name = "Brand Name")]
-        [StringLength (20, MinimumLength = 3)]
         public string BrandName { get; set; }
-
-        [Required]
-        [Display (Name = "Origin")]
-        [StringLength (50, MinimumLength = 5)]
         public string Origin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

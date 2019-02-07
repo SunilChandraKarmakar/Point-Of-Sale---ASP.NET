@@ -11,25 +11,12 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Unit
     {
         public int ID { get; set; }
-
-        [Required]
-        [Display(Name = "Unit Name")]
-        [StringLength (10, MinimumLength = 1)]
         public string UnitName { get; set; }
-
-        [Required]
-        [Display(Name = "Description of Unit")]
-        [DataType(DataType.MultilineText)]
-        [StringLength(30, MinimumLength = 2)]
         public string UnitDescription { get; set; }
-
-        [Required]
-        [Display(Name = "Quantity of Unit")]
         public int UnitPrimaryQty { get; set; }
     }
 }
