@@ -257,6 +257,13 @@
     <Compile Include="Purchase.cs">
       <DependentUpon>POS_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReportDetails_Result.cs">
       <DependentUpon>POS_Model.tt</DependentUpon>
     </Compile>
@@ -285,6 +292,7 @@
       <DependentUpon>POS_Model.edmx</DependentUpon>
       <LastGenOutput>POS_Model.cs</LastGenOutput>
     </Content>
+    <Content Include="Report.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="POS_Model.edmx">
