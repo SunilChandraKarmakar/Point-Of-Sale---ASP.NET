@@ -11,9 +11,12 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class EmployeeAdmin
     {
+        [Required]
+        [Display(Name = "Name")]
         public int EmployeeID { get; set; }
     
         public virtual Employee Employee { get; set; }
