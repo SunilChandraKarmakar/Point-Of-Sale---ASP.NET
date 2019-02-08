@@ -52,12 +52,12 @@ namespace Point_Of_Sale
 
         [Required]
         [Display(Name = "Join date")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public System.DateTime EmployeeJoinDate { get; set; }
 
         [Required]
         [Display(Name = "Date of birth")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public System.DateTime EmployeeDateOfBirth { get; set; }
 
         [Required]
