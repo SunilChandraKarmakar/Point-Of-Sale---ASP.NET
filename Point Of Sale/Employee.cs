@@ -11,7 +11,8 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,15 +22,56 @@ namespace Point_Of_Sale
         }
     
         public int ID { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        [StringLength(30, MinimumLength = 2)]
         public string EmployeeName { get; set; }
+
+        [Required]
+        [Display(Name = "Contact Number")]
+        [DataType(DataType.PhoneNumber)]
+        [StringLength(20, MinimumLength = 11)]
         public string EmployeeContact { get; set; }
+
+        [Required]
+        [Display(Name = "E-mail")]
+        [DataType(DataType.EmailAddress)]
+        [StringLength(30, MinimumLength = 3)]
         public string EmployeeEmail { get; set; }
+
+        [Required]
+        [Display(Name = "Password")]
+        [DataType(DataType.Password)]
+        [StringLength(200, MinimumLength = 5)]
         public string EmployeePassword { get; set; }
+
+        [Required]
+        [Display(Name = "Gender")]
         public bool EmployeeGender { get; set; }
+
+        [Required]
+        [Display(Name = "Join Date")]
+        [DataType(DataType.Date)]
         public System.DateTime EmployeeJoinDate { get; set; }
+
+        [Required]
+        [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
         public System.DateTime EmployeeDateOfBirth { get; set; }
+
+        [Required]
+        [Display(Name = "Address")]
+        [DataType(DataType.MultilineText)]
+        [StringLength(1000, MinimumLength = 2)]
         public string EmployeeAddress { get; set; }
+
+        [Required]
+        [Display(Name = "City")]
         public int EmployeeCityID { get; set; }
+
+        [Required]
+        [Display(Name = "Picture")]
         public string EmployeePicture { get; set; }
     
         public virtual City City { get; set; }
