@@ -71,6 +71,7 @@ namespace Point_Of_Sale
         public int EmployeeCityID { get; set; }
 
         [Required]
+        [DataType(DataType.ImageUrl)]
         [Display(Name = "Picture")]
         public string EmployeePicture { get; set; }
     
