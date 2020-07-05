@@ -4,6 +4,8 @@
 @{
     ViewBag.Title = "Index";
     var ProductList = ViewBag.ProductList as IEnumerable<Point_Of_Sale.Product>;
+    List<Purchase> purchaseProductList = ViewBag.PurchaseProducts;
+    int sellQuantity = 0, totalQuantity = 0;
 }
 
 @*<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Product Dashboard</u></h2>*@
@@ -36,7 +38,24 @@
             <td>
                 Name : @Html.DisplayFor(modelItem => item.ProductName)<br />
                 Code : @Html.DisplayFor(modelItem => item.ProductCode)<br />
-                Quentity : @Html.DisplayFor(modelItem => item.ProductQuentity)<br />
+
+                @foreach (Purchase purchaseProduct in purchaseProductList)
+                {
+                    if (purchaseProduct.ProductID == item.ID)
+                    {
+                        sellQuantity = sellQuantity + purchaseProduct.Quantity;
+                    }
+                }
+
+                Quentity : @Html.DisplayFor(modelItem => item.ProductQuentity) &nbsp; &nbsp;
+                Sell : @sellQuantity &nbsp; &nbsp;
+
+                @{
+                    totalQuantity = item.ProductQuentity - sellQuantity;
+                    sellQuantity = 0;
+                }
+
+                Total : @totalQuantity
             </td>
             <td>
                 Discription : @Html.DisplayFor(modelItem => item.ProductDescription)<br />

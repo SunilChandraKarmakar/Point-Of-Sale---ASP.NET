@@ -22,8 +22,10 @@ namespace Point_Of_Sale.Controllers
                 Session["DefaultView"] = "Index";
                 Session["DefaultControll"] = "Product";
                 return RedirectToAction("Login", "Employee");
-            } 
+            }
 
+
+            ViewBag.PurchaseProducts = db.Purchases.ToList();
             ViewBag.ProductList = db.Products.ToList();
             var products = db.Products.Include(p => p.Brand).Include(p => p.Category);
             return View();
