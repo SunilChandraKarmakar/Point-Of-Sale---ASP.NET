@@ -11,8 +11,7 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Country
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,10 +21,6 @@ namespace Point_Of_Sale
         }
     
         public int ID { get; set; }
-
-        [Required]
-        [Display(Name = "Name")]
-        [StringLength(15,MinimumLength = 2)]
         public string CountryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

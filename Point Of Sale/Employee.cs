@@ -24,26 +24,25 @@ namespace Point_Of_Sale
         public int ID { get; set; }
 
         [Required]
+        [StringLength(50, MinimumLength = 2)]
         [Display(Name = "Name")]
-        [StringLength(30, MinimumLength = 2)]
         public string EmployeeName { get; set; }
 
         [Required]
-        [Display(Name = "Contact Number")]
+        [StringLength(14, MinimumLength = 11)]
         [DataType(DataType.PhoneNumber)]
-        [StringLength(20, MinimumLength = 11)]
+        [Display(Name = "Contact")]
         public string EmployeeContact { get; set; }
 
         [Required]
-        [Display(Name = "E-mail")]
+        [StringLength(50, MinimumLength = 2)]
+        [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
-        [StringLength(30, MinimumLength = 3)]
         public string EmployeeEmail { get; set; }
 
         [Required]
-        [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        [StringLength(200, MinimumLength = 5)]
+        [Display(Name = "Password")]
         public string EmployeePassword { get; set; }
 
         [Required]
@@ -51,28 +50,28 @@ namespace Point_Of_Sale
         public bool EmployeeGender { get; set; }
 
         [Required]
-        [Display(Name = "Join Date")]
         [DataType(DataType.Date)]
+        [Display(Name = "Join Date")]
         public System.DateTime EmployeeJoinDate { get; set; }
 
         [Required]
-        [Display(Name = "Date of Birth")]
         [DataType(DataType.Date)]
+        [Display(Name = "DOB")]
         public System.DateTime EmployeeDateOfBirth { get; set; }
 
         [Required]
+        [StringLength(500, MinimumLength = 2)]
         [Display(Name = "Address")]
         [DataType(DataType.MultilineText)]
-        [StringLength(1000, MinimumLength = 2)]
         public string EmployeeAddress { get; set; }
 
         [Required]
-        [Display(Name = "City")]
+        [Display(Name = "Select City")]
         public int EmployeeCityID { get; set; }
 
         [Required]
+        [Display(Name = "Image")]
         [DataType(DataType.ImageUrl)]
-        [Display(Name = "Picture")]
         public string EmployeePicture { get; set; }
     
         public virtual City City { get; set; }

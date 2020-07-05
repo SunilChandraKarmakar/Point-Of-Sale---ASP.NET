@@ -4,9 +4,19 @@
     ViewBag.Title = "Index";
 }
 
-<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Category Dashboard</u></h2>
+@*<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Category Dashboard</u></h2>*@
 
-<p style="margin-bottom:30px;">@Html.ActionLink("Create New", "Create")</p>
+<div class="row">
+    <div class="col-md-12" style="text-align: center">
+        <h2 style="font-family: 'Kalam', cursive">Category Information</h2>
+        <hr />
+    </div>
+</div>
+
+<p style="margin-bottom:30px;">
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href="../Category/Create" class="btn btn-success">Create New</a>
+</p>
 
 <table id="myTable" class="display">
     <thead>
@@ -31,9 +41,12 @@
                     @Html.DisplayFor(modelItem => item.Category2.CategoryName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |*@
                     @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+
+                    <a href="../Category/Edit/@item.ID" class="btn btn-info">Edit</a>
+                    <a href="../Category/Delete/@item.ID" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }

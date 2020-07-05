@@ -11,8 +11,7 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,19 +22,8 @@ namespace Point_Of_Sale
         }
     
         public int ID { get; set; }
-
-        [Required]
-        [Display(Name = "Category")]
-        [StringLength(30, MinimumLength = 2)]
         public string CategoryName { get; set; }
-
-        [Required]
-        [Display(Name = "Description")]
-        [StringLength(200, MinimumLength = 2)]
-        [DataType(DataType.MultilineText)]
         public string CategoryDescription { get; set; }
-
-        [Display(Name = "Parent Category")]
         public Nullable<int> CategoryID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

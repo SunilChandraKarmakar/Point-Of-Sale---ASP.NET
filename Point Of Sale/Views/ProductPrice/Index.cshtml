@@ -6,9 +6,19 @@
     var ProductPrice = ViewBag.ProductPrice as IEnumerable<Point_Of_Sale.ProductPrice>;
 }
 
-<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Product Price Dashboard</u></h2>
+@*<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Product Price Dashboard</u></h2>*@
 
-<p style="margin-bottom:30px;">@Html.ActionLink("Create New", "Create")</p>
+<div class="row">
+    <div class="col-md-12" style="text-align: center">
+        <h2 style="font-family: 'Kalam', cursive">Product Price Information</h2>
+        <hr />
+    </div>
+</div>
+
+<p style="margin-bottom:30px;">
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href="../ProductPrice/Create" class="btn btn-success">Create New</a>
+</p>
 
 
 <table id="myTable" class="display">
@@ -29,9 +39,12 @@
             @Html.DisplayFor(modelItem => item.ProductPrice1)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ID }) |*@
             @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
+
+            <a href="../ProductPrice/Edit/@item.ID" class="btn btn-info">Edit</a>
+            <a href="../ProductPrice/Delete/@item.ID" class="btn btn-danger">Delete</a>
         </td>
     </tr>
 }

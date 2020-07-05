@@ -6,11 +6,12 @@
     <title>@ViewBag.Title - POS - Application</title>
 
     @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">*@
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">*@
     @*<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />*@
-    
+
+    <link href="https://fonts.googleapis.com/css?family=Kalam" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/fontawesome-free-5.6.3-web/css/all.css" />
-    <link rel="stylesheet" type="text/css" href="/Data-Table/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/Data-Table/datatables.min.css" />
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -20,7 +21,7 @@
     <div class="container-fluid">
         <nav class="navbar navbar-light" style="background-color: #e3f2fd; margin-top:-40px;">
             <div class="container-fluid">
-                @Html.ActionLink("Point Of Sale", "", "", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Point Of Sale", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -39,25 +40,25 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Employee", "Index", "Employee")</li>
-                                <li>@Html.ActionLink("Employee Salary", "Index", "EmployeeSalary")</li>
+                                @*<li>@Html.ActionLink("Employee Salary", "Index", "EmployeeSalary")</li>*@
                                 <li>@Html.ActionLink("Employee Admin", "Index", "EmployeeAdmin")</li>
                             </ul>
                         </li>
 
-                        <li class="dropdown">
+                        @*<li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">References <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Country", "Index", "Country")</li>
                                 <li>@Html.ActionLink("City", "Index", "City")</li>
                             </ul>
-                        </li>
+                        </li>*@
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Product <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Brand", "Index", "Brand")</li>
                                 <li>@Html.ActionLink("Category", "Index", "Category")</li>
-                                <li>@Html.ActionLink("Unit", "Index", "Unit")</li>
+                                @*<li>@Html.ActionLink("Unit", "Index", "Unit")</li>*@
                                 <li role="separator" class="divider"></li>
                                 <li>@Html.ActionLink("Product", "Index", "Product")</li>
                                 <li>@Html.ActionLink("Product Price", "Index", "ProductPrice")</li>
@@ -66,11 +67,11 @@
                         </li>
 
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Purchase and Customer<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sell and Customer<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Purchase", "Index", "CustomerAndPurchase")</li>
+                                <li>@Html.ActionLink("Sell", "Index", "CustomerAndPurchase")</li>
                                 <li>@Html.ActionLink("Customer Information", "Index", "Customer")</li>
-                                <li>@Html.ActionLink("Purchase Information", "Index", "Purchase")</li>
+                                <li>@Html.ActionLink("Sell Information", "Index", "Purchase")</li>
                                 <li><a href="../Report.aspx">Report View</a></li>
                             </ul>
                         </li>
@@ -94,7 +95,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Sunil Chandra Karmakar</p>
+            <p>&copy; @DateTime.Now.Year - Learning Code</p>
         </footer>
     </div>
 

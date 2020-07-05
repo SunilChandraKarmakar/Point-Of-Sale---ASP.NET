@@ -24,7 +24,7 @@ namespace Point_Of_Sale
             Session["EmployeeName"] = "";
             Session["type"] = "";
             Session["DefaultView"] = "Index";
-            Session["DefaultControll"] = "Home";
+            Session["DefaultControll"] = "Employee";
         }
     }
 }

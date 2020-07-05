@@ -4,9 +4,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Employee Admin Dashboard</u></h2>
+    @*<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Employee Admin Dashboard</u></h2>*@
 
-<p style="margin-bottom:30px;">@Html.ActionLink("Create New", "Create")</p>
+<div class="row">
+    <div class="col-md-12" style="text-align: center">
+        <h2 style="font-family: 'Kalam', cursive">Admin Employee Information</h2>
+        <hr />
+    </div>
+</div>
+
+<p style="margin-bottom:30px;">
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href="../EmployeeAdmin/Create" class="btn btn-success">Create New</a>
+</p>
+
 
 <table id="myTable" class="display">
     <thead>
@@ -22,9 +33,11 @@
                 @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |*@
                 @*@Html.ActionLink("Details", "Details", new { id=item.EmployeeID }) |*@
-                @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })*@
+                <a href="../EmployeeAdmin/Edit/@item.EmployeeID" class="btn btn-info">Edit</a>
+                <a href="../EmployeeAdmin/Delete/@item.EmployeeID" class="btn btn-danger">Delete</a>
             </td>
         </tr>
     }

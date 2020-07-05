@@ -4,31 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c95b6c15e3ec45908eada2ff8c0f2f98" Name="Diagram1">
-        <EntityTypeShape EntityType="POS_WebModel.City" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="POS_WebModel.Country" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="POS_WebModel.Employee" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="POS_WebModel.EmployeeAdmin" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
+      <Diagram DiagramId="5b870b54522c4c219f63a4bc5f02302b" Name="Diagram1">
+        <EntityTypeShape EntityType="POS_WebModel.Brand" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.Category" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.City" Width="1.5" PointX="10" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.Country" Width="1.5" PointX="7.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.Customer" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.Employee" Width="1.5" PointX="12.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.EmployeeAdmin" Width="1.5" PointX="14.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.EpmloyeeSalary" Width="1.5" PointX="14.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.Product" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.ProductImage" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.ProductPrice" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.Purchase" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.sysdiagram" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_WebModel.Unit" Width="1.5" PointX="8.75" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="POS_WebModel.FK__Product__BrandID__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="POS_WebModel.FK__Category__Catego__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="POS_WebModel.FK__Product__Categor__534D60F1" ManuallyRouted="false" />
         <AssociationConnector Association="POS_WebModel.FK__City__CountryID__3A81B327" ManuallyRouted="false" />
         <AssociationConnector Association="POS_WebModel.FK__Employee__Employ__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="POS_WebModel.FK__Purchase__TotalP__18EBB532" ManuallyRouted="false" />
         <AssociationConnector Association="POS_WebModel.FK__EmployeeA__Emplo__4222D4EF" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="POS_WebModel.Brand" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="POS_WebModel.Category" Width="1.5" PointX="3.375" PointY="5.75" />
-        <AssociationConnector Association="POS_WebModel.FK__Category__Catego__4BAC3F29" />
-        <EntityTypeShape EntityType="POS_WebModel.Unit" Width="1.5" PointX="5.375" PointY="5.75" />
-        <EntityTypeShape EntityType="POS_WebModel.Product" Width="1.5" PointX="7.625" PointY="5" />
-        <AssociationConnector Association="POS_WebModel.FK__Product__BrandID__5441852A" />
-        <AssociationConnector Association="POS_WebModel.FK__Product__Categor__534D60F1" />
-        <EntityTypeShape EntityType="POS_WebModel.ProductPrice" Width="1.5" PointX="9.875" PointY="5.625" />
-        <AssociationConnector Association="POS_WebModel.FK__ProductPr__Produ__571DF1D5" />
-        <EntityTypeShape EntityType="POS_WebModel.ProductImage" Width="1.5" PointX="9.875" PointY="8.625" />
-        <AssociationConnector Association="POS_WebModel.FK__ProductIm__Produ__59FA5E80" />
-        <EntityTypeShape EntityType="POS_WebModel.EpmloyeeSalary" Width="1.5" PointX="7.5" PointY="9.75" />
-        <AssociationConnector Association="POS_WebModel.FK__EpmloyeeS__Emplo__5EBF139D" />
-        <EntityTypeShape EntityType="POS_WebModel.Customer" Width="1.5" PointX="10.625" PointY="2.625" />
-        <EntityTypeShape EntityType="POS_WebModel.Purchase" Width="1.5" PointX="12.875" PointY="5.5" />
-        <AssociationConnector Association="POS_WebModel.FK__Purchase__TotalP__18EBB532" />
-        <AssociationConnector Association="POS_WebModel.FK__Purchase__Produc__19DFD96B" />
+        <AssociationConnector Association="POS_WebModel.FK__EpmloyeeS__Emplo__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="POS_WebModel.FK__ProductIm__Produ__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="POS_WebModel.FK__ProductPr__Produ__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="POS_WebModel.FK__Purchase__Produc__19DFD96B" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

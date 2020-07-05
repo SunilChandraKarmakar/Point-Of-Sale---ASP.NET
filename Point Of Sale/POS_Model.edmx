@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="POS_WebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="POS_WebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="ID" />
@@ -119,6 +119,16 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -261,7 +271,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="ReportDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="POS_WebModelStoreContainer">
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -275,6 +316,7 @@
           <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPrice" EntityType="Self.ProductPrice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Category__Catego__4BAC3F29" Association="Self.FK__Category__Catego__4BAC3F29">
             <End Role="Category" EntitySet="Category" />
@@ -321,10 +363,32 @@
             <End Role="Purchase" EntitySet="Purchase" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="POS_WebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Origin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__BrandID__5441852A" FromRole="Brand" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <NavigationProperty Name="Category1" Relationship="Self.FK__Category__Catego__4BAC3F29" FromRole="Category" ToRole="Category1" />
+          <NavigationProperty Name="Category2" Relationship="Self.FK__Category__Catego__4BAC3F29" FromRole="Category1" ToRole="Category" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__Categor__534D60F1" FromRole="Category" ToRole="Product" />
+        </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="ID" />
@@ -343,6 +407,17 @@
           <Property Name="CountryName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cities" Relationship="Self.FK__City__CountryID__3A81B327" FromRole="Country" ToRole="City" />
         </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchase__TotalP__18EBB532" FromRole="Customer" ToRole="Purchase" />
+        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="ID" />
@@ -360,7 +435,7 @@
           <Property Name="EmployeePicture" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="City" Relationship="Self.FK__Employee__Employ__3F466844" FromRole="Employee" ToRole="City" />
           <NavigationProperty Name="EmployeeAdmin" Relationship="Self.FK__EmployeeA__Emplo__4222D4EF" FromRole="Employee" ToRole="EmployeeAdmin" />
-          <NavigationProperty Name="EpmloyeeSalaries" Relationship="POS_WebModel.FK__EpmloyeeS__Emplo__5EBF139D" FromRole="Employee" ToRole="EpmloyeeSalary" />
+          <NavigationProperty Name="EpmloyeeSalaries" Relationship="Self.FK__EpmloyeeS__Emplo__5EBF139D" FromRole="Employee" ToRole="EpmloyeeSalary" />
         </EntityType>
         <EntityType Name="EmployeeAdmin">
           <Key>
@@ -369,6 +444,122 @@
           <Property Name="EmployeeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.FK__EmployeeA__Emplo__4222D4EF" FromRole="EmployeeAdmin" ToRole="Employee" />
         </EntityType>
+        <EntityType Name="EpmloyeeSalary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeSalary" Type="Double" Nullable="false" />
+          <Property Name="SalaryMonth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SalaryReciveDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__EpmloyeeS__Emplo__5EBF139D" FromRole="EpmloyeeSalary" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductQuentity" Type="Int32" Nullable="false" />
+          <Property Name="ProductDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductPosition" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="BrandID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK__Product__BrandID__5441852A" FromRole="Product" ToRole="Brand" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__534D60F1" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="ProductImages" Relationship="Self.FK__ProductIm__Produ__59FA5E80" FromRole="Product" ToRole="ProductImage" />
+          <NavigationProperty Name="ProductPrices" Relationship="Self.FK__ProductPr__Produ__571DF1D5" FromRole="Product" ToRole="ProductPrice" />
+          <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchase__Produc__19DFD96B" FromRole="Product" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="ProductImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductImage1" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ProductTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__ProductIm__Produ__59FA5E80" FromRole="ProductImage" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductPrice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductPrice1" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__ProductPr__Produ__571DF1D5" FromRole="ProductPrice" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Purchase__TotalP__18EBB532" FromRole="Purchase" ToRole="Customer" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Purchase__Produc__19DFD96B" FromRole="Purchase" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnitName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UnitDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UnitPrimaryQty" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Product__BrandID__5441852A">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Category__Catego__4BAC3F29">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Categor__534D60F1">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__City__CountryID__3A81B327">
           <End Role="Country" Type="Self.Country" Multiplicity="1" />
           <End Role="City" Type="Self.City" Multiplicity="*" />
@@ -393,6 +584,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Purchase__TotalP__18EBB532">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__EmployeeA__Emplo__4222D4EF">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
           <End Role="EmployeeAdmin" Type="Self.EmployeeAdmin" Multiplicity="0..1" />
@@ -405,207 +608,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="POS_WebEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Cities" EntityType="Self.City" />
-          <EntitySet Name="Countries" EntityType="Self.Country" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="EmployeeAdmins" EntityType="Self.EmployeeAdmin" />
-          <AssociationSet Name="FK__City__CountryID__3A81B327" Association="Self.FK__City__CountryID__3A81B327">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="City" EntitySet="Cities" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Employee__Employ__3F466844" Association="Self.FK__Employee__Employ__3F466844">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Employee" EntitySet="Employees" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EmployeeA__Emplo__4222D4EF" Association="Self.FK__EmployeeA__Emplo__4222D4EF">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="EmployeeAdmin" EntitySet="EmployeeAdmins" />
-          </AssociationSet>
-          <EntitySet Name="Brands" EntityType="POS_WebModel.Brand" />
-          <EntitySet Name="Categories" EntityType="POS_WebModel.Category" />
-          <AssociationSet Name="FK__Category__Catego__4BAC3F29" Association="POS_WebModel.FK__Category__Catego__4BAC3F29">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Category1" EntitySet="Categories" />
-          </AssociationSet>
-          <EntitySet Name="Units" EntityType="POS_WebModel.Unit" />
-          <EntitySet Name="Products" EntityType="POS_WebModel.Product" />
-          <AssociationSet Name="FK__Product__BrandID__5441852A" Association="POS_WebModel.FK__Product__BrandID__5441852A">
-            <End Role="Brand" EntitySet="Brands" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Product__Categor__534D60F1" Association="POS_WebModel.FK__Product__Categor__534D60F1">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <EntitySet Name="ProductPrices" EntityType="POS_WebModel.ProductPrice" />
-          <AssociationSet Name="FK__ProductPr__Produ__571DF1D5" Association="POS_WebModel.FK__ProductPr__Produ__571DF1D5">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ProductPrice" EntitySet="ProductPrices" />
-          </AssociationSet>
-          <EntitySet Name="ProductImages" EntityType="POS_WebModel.ProductImage" />
-          <AssociationSet Name="FK__ProductIm__Produ__59FA5E80" Association="POS_WebModel.FK__ProductIm__Produ__59FA5E80">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ProductImage" EntitySet="ProductImages" />
-          </AssociationSet>
-          <EntitySet Name="EpmloyeeSalaries" EntityType="POS_WebModel.EpmloyeeSalary" />
-          <AssociationSet Name="FK__EpmloyeeS__Emplo__5EBF139D" Association="POS_WebModel.FK__EpmloyeeS__Emplo__5EBF139D">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="EpmloyeeSalary" EntitySet="EpmloyeeSalaries" />
-          </AssociationSet>
-          <EntitySet Name="Customers" EntityType="POS_WebModel.Customer" />
-          <EntitySet Name="Purchases" EntityType="POS_WebModel.Purchase" />
-          <AssociationSet Name="FK__Purchase__TotalP__18EBB532" Association="POS_WebModel.FK__Purchase__TotalP__18EBB532">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Purchase" EntitySet="Purchases" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Purchase__Produc__19DFD96B" Association="POS_WebModel.FK__Purchase__Produc__19DFD96B">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="Purchase" EntitySet="Purchases" />
-          </AssociationSet>
-          <FunctionImport Name="ReportDetails" ReturnType="Collection(POS_WebModel.ReportDetails_Result)" />
-          </EntityContainer>
-        <EntityType Name="Brand">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BrandName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Origin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Products" Relationship="POS_WebModel.FK__Product__BrandID__5441852A" FromRole="Brand" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="CategoryDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CategoryID" Type="Int32" />
-          <NavigationProperty Name="Category1" Relationship="POS_WebModel.FK__Category__Catego__4BAC3F29" FromRole="Category" ToRole="Category1" />
-          <NavigationProperty Name="Category2" Relationship="POS_WebModel.FK__Category__Catego__4BAC3F29" FromRole="Category1" ToRole="Category" />
-          <NavigationProperty Name="Products" Relationship="POS_WebModel.FK__Product__Categor__534D60F1" FromRole="Category" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK__Category__Catego__4BAC3F29">
-          <End Type="POS_WebModel.Category" Role="Category" Multiplicity="0..1" />
-          <End Type="POS_WebModel.Category" Role="Category1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Category1">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Unit">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UnitName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="UnitDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UnitPrimaryQty" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ProductCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ProductQuentity" Type="Int32" Nullable="false" />
-          <Property Name="ProductDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ProductPosition" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="BrandID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Brand" Relationship="POS_WebModel.FK__Product__BrandID__5441852A" FromRole="Product" ToRole="Brand" />
-          <NavigationProperty Name="Category" Relationship="POS_WebModel.FK__Product__Categor__534D60F1" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="ProductPrices" Relationship="POS_WebModel.FK__ProductPr__Produ__571DF1D5" FromRole="Product" ToRole="ProductPrice" />
-          <NavigationProperty Name="ProductImages" Relationship="POS_WebModel.FK__ProductIm__Produ__59FA5E80" FromRole="Product" ToRole="ProductImage" />
-          <NavigationProperty Name="Purchases" Relationship="POS_WebModel.FK__Purchase__Produc__19DFD96B" FromRole="Product" ToRole="Purchase" />
-        </EntityType>
-        <Association Name="FK__Product__BrandID__5441852A">
-          <End Type="POS_WebModel.Brand" Role="Brand" Multiplicity="1" />
-          <End Type="POS_WebModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Brand">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="BrandID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Product__Categor__534D60F1">
-          <End Type="POS_WebModel.Category" Role="Category" Multiplicity="1" />
-          <End Type="POS_WebModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ProductPrice">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="ProductPrice1" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="POS_WebModel.FK__ProductPr__Produ__571DF1D5" FromRole="ProductPrice" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK__ProductPr__Produ__571DF1D5">
-          <End Type="POS_WebModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="POS_WebModel.ProductPrice" Role="ProductPrice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ProductPrice">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ProductImage">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="ProductImage1" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="ProductTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Product" Relationship="POS_WebModel.FK__ProductIm__Produ__59FA5E80" FromRole="ProductImage" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK__ProductIm__Produ__59FA5E80">
-          <End Type="POS_WebModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="POS_WebModel.ProductImage" Role="ProductImage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ProductImage">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="EpmloyeeSalary">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeSalary" Type="Double" Nullable="false" />
-          <Property Name="SalaryMonth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="SalaryReciveDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Employee" Relationship="POS_WebModel.FK__EpmloyeeS__Emplo__5EBF139D" FromRole="EpmloyeeSalary" ToRole="Employee" />
-        </EntityType>
         <Association Name="FK__EpmloyeeS__Emplo__5EBF139D">
-          <End Type="POS_WebModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="POS_WebModel.EpmloyeeSalary" Role="EpmloyeeSalary" Multiplicity="*" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EpmloyeeSalary" Type="Self.EpmloyeeSalary" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="ID" />
@@ -615,45 +620,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OrderNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Purchases" Relationship="POS_WebModel.FK__Purchase__TotalP__18EBB532" FromRole="Customer" ToRole="Purchase" />
-        </EntityType>
-        <EntityType Name="Purchase">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerID" Type="Int32" Nullable="false" />
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Customer" Relationship="POS_WebModel.FK__Purchase__TotalP__18EBB532" FromRole="Purchase" ToRole="Customer" />
-          <NavigationProperty Name="Product" Relationship="POS_WebModel.FK__Purchase__Produc__19DFD96B" FromRole="Purchase" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK__Purchase__TotalP__18EBB532">
-          <End Type="POS_WebModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="POS_WebModel.Purchase" Role="Purchase" Multiplicity="*" />
+        <Association Name="FK__ProductIm__Produ__59FA5E80">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
+            <Principal Role="Product">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Purchase">
-              <PropertyRef Name="CustomerID" />
+            <Dependent Role="ProductImage">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductPr__Produ__571DF1D5">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductPrice" Type="Self.ProductPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductPrice">
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Purchase__Produc__19DFD96B">
-          <End Type="POS_WebModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="POS_WebModel.Purchase" Role="Purchase" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ID" />
@@ -663,6 +656,97 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="POS_WebEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Brands" EntityType="Self.Brand" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="EmployeeAdmins" EntityType="Self.EmployeeAdmin" />
+          <EntitySet Name="EpmloyeeSalaries" EntityType="Self.EpmloyeeSalary" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductImages" EntityType="Self.ProductImage" />
+          <EntitySet Name="ProductPrices" EntityType="Self.ProductPrice" />
+          <EntitySet Name="Purchases" EntityType="Self.Purchase" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Units" EntityType="Self.Unit" />
+          <AssociationSet Name="FK__Product__BrandID__5441852A" Association="Self.FK__Product__BrandID__5441852A">
+            <End Role="Brand" EntitySet="Brands" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Category__Catego__4BAC3F29" Association="Self.FK__Category__Catego__4BAC3F29">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category1" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Categor__534D60F1" Association="Self.FK__Product__Categor__534D60F1">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__City__CountryID__3A81B327" Association="Self.FK__City__CountryID__3A81B327">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Employ__3F466844" Association="Self.FK__Employee__Employ__3F466844">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__TotalP__18EBB532" Association="Self.FK__Purchase__TotalP__18EBB532">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmployeeA__Emplo__4222D4EF" Association="Self.FK__EmployeeA__Emplo__4222D4EF">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeeAdmin" EntitySet="EmployeeAdmins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EpmloyeeS__Emplo__5EBF139D" Association="Self.FK__EpmloyeeS__Emplo__5EBF139D">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EpmloyeeSalary" EntitySet="EpmloyeeSalaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductIm__Produ__59FA5E80" Association="Self.FK__ProductIm__Produ__59FA5E80">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductImage" EntitySet="ProductImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductPr__Produ__571DF1D5" Association="Self.FK__ProductPr__Produ__571DF1D5">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductPrice" EntitySet="ProductPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__Produc__19DFD96B" Association="Self.FK__Purchase__Produc__19DFD96B">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+          <FunctionImport Name="ReportDetails" ReturnType="Collection(POS_WebModel.ReportDetails_Result)" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(POS_WebModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(POS_WebModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
         <ComplexType Name="ReportDetails_Result">
           <Property Type="Int32" Name="InvoiceNo" Nullable="false" />
           <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
@@ -677,12 +761,42 @@
           <Property Type="Int32" Name="Quantity" Nullable="false" />
           <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="18" Scale="0" />
         </ComplexType>
-        </Schema>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="POS_WebModelStoreContainer" CdmEntityContainer="POS_WebEntities">
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="POS_WebModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="POS_WebModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="POS_WebModel.City">
               <MappingFragment StoreEntitySet="City">
@@ -697,6 +811,17 @@
               <MappingFragment StoreEntitySet="Country">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="POS_WebModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -724,99 +849,80 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Brands">
-            <EntityTypeMapping TypeName="POS_WebModel.Brand">
-              <MappingFragment StoreEntitySet="Brand">
-                <ScalarProperty Name="Origin" ColumnName="Origin" />
-                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <EntitySetMapping Name="EpmloyeeSalaries">
+            <EntityTypeMapping TypeName="POS_WebModel.EpmloyeeSalary">
+              <MappingFragment StoreEntitySet="EpmloyeeSalary">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="POS_WebModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Units">
-            <EntityTypeMapping TypeName="POS_WebModel.Unit">
-              <MappingFragment StoreEntitySet="Unit">
-                <ScalarProperty Name="UnitPrimaryQty" ColumnName="UnitPrimaryQty" />
-                <ScalarProperty Name="UnitDescription" ColumnName="UnitDescription" />
-                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="EmployeeSalary" ColumnName="EmployeeSalary" />
+                <ScalarProperty Name="SalaryMonth" ColumnName="SalaryMonth" />
+                <ScalarProperty Name="SalaryReciveDate" ColumnName="SalaryReciveDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="POS_WebModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="ProductPosition" ColumnName="ProductPosition" />
-                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
-                <ScalarProperty Name="ProductQuentity" ColumnName="ProductQuentity" />
-                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductPrices">
-            <EntityTypeMapping TypeName="POS_WebModel.ProductPrice">
-              <MappingFragment StoreEntitySet="ProductPrice">
-                <ScalarProperty Name="ProductPrice1" ColumnName="ProductPrice" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ProductQuentity" ColumnName="ProductQuentity" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="ProductPosition" ColumnName="ProductPosition" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductImages">
             <EntityTypeMapping TypeName="POS_WebModel.ProductImage">
               <MappingFragment StoreEntitySet="ProductImage">
-                <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
-                <ScalarProperty Name="ProductImage1" ColumnName="ProductImage" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductImage1" ColumnName="ProductImage" />
+                <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EpmloyeeSalaries">
-            <EntityTypeMapping TypeName="POS_WebModel.EpmloyeeSalary">
-              <MappingFragment StoreEntitySet="EpmloyeeSalary">
-                <ScalarProperty Name="SalaryReciveDate" ColumnName="SalaryReciveDate" />
-                <ScalarProperty Name="SalaryMonth" ColumnName="SalaryMonth" />
-                <ScalarProperty Name="EmployeeSalary" ColumnName="EmployeeSalary" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <EntitySetMapping Name="ProductPrices">
+            <EntityTypeMapping TypeName="POS_WebModel.ProductPrice">
+              <MappingFragment StoreEntitySet="ProductPrice">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="POS_WebModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductPrice1" ColumnName="ProductPrice" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Purchases">
             <EntityTypeMapping TypeName="POS_WebModel.Purchase">
               <MappingFragment StoreEntitySet="Purchase">
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="POS_WebModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="POS_WebModel.Unit">
+              <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="UnitDescription" ColumnName="UnitDescription" />
+                <ScalarProperty Name="UnitPrimaryQty" ColumnName="UnitPrimaryQty" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -838,7 +944,31 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          </EntityContainerMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="POS_WebModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="POS_WebModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="POS_WebModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="POS_WebModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="POS_WebModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="POS_WebModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="POS_WebModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="POS_WebModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="POS_WebModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

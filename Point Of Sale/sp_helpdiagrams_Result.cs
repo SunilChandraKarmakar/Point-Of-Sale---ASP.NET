@@ -10,15 +10,13 @@
 namespace Point_Of_Sale
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ProductImage
+    public partial class sp_helpdiagrams_Result
     {
+        public string Database { get; set; }
+        public string Name { get; set; }
         public int ID { get; set; }
-        public int ProductID { get; set; }
-        public string ProductImage1 { get; set; }
-        public string ProductTitle { get; set; }
-    
-        public virtual Product Product { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

@@ -2,66 +2,67 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string gender = "";
 }
 
-<h2 style="text-align:center; color:chocolate; margin-bottom:30px;"><u>Employee Dashboard</u></h2>
+<h2>Index</h2>
 
-<p style="margin-bottom:30px;">
+<p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
-
-<table id="myTable" class="display">
-    <thead>
-        <tr>
-            <th>Basic Info</th>
-            <th>Other Info</th>
-            <th>Employee Address</th>
-            <th>Employee Picture</th>
-            <th>Action</th>
-        </tr>
-    </thead>
+<table class="table">
+    <tr>
+        <th>
+            Basic Info
+        </th>
+        <th>
+            Other Info
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeePicture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeAdmin.EmployeeID)
+        </th>
+        <th></th>
+    </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.EmployeeName)<br />
-            @Html.DisplayFor(modelItem => item.EmployeeContact)<br />
-            @Html.DisplayFor(modelItem => item.EmployeeEmail)<br /> 
-            @if(item.EmployeeGender == true)
-            {
-                @Html.Raw("Male")<br />
-            }
-            else
-            {
-                @Html.Raw("Female")<br />
-            }
-
+            Name: @Html.DisplayFor(modelItem => item.EmployeeName) <br />
+            Contact: @Html.DisplayFor(modelItem => item.EmployeeContact) <br />
+            Email: @Html.DisplayFor(modelItem => item.EmployeeEmail) <br />
         </td>
         <td>
-            Join Date : @Html.DisplayFor(modelItem => item.EmployeeJoinDate)<br />
-            DOB : @Html.DisplayFor(modelItem => item.EmployeeDateOfBirth)<br />
-            @if (item.EmployeeAdmin != null)
+            @if(item.EmployeeGender == true)
             {
-                 @Html.Raw("Administrator")
+                gender = "Male";
             }
             else
             {
-                @Html.Raw("Non Administrator")
+                gender = "Female";
             }
+            Gender: @gender <br />
+            Join Date: @item.EmployeeJoinDate.ToString("dd/MM/yyyy") <br />
+            DOB: @item.EmployeeDateOfBirth.ToString("dd/MM/yyyy") <br />
         </td>
         <td>
             <address>
-                @Html.DisplayFor(modelItem => item.EmployeeAddress)<br />
-             <b>@Html.DisplayFor(modelItem => item.City.CityName)</b><br />
+                @Html.DisplayFor(modelItem => item.City.CityName) <br />
+                @Html.DisplayFor(modelItem => item.EmployeeAddress)
             </address>
         </td>
         <td>
-            <img src="../Images/Uploads/@(item.ID.ToString() + "_" + item.EmployeePicture)" height="100" />
+            <img src="../Images/Uploads/@item.EmployeePicture.ToString()" width="100" height="100" />
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
