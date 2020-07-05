@@ -11,13 +11,29 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class EpmloyeeSalary
     {
         public int ID { get; set; }
+
+        [Required]
+        [Display(Name = "Select Employee")]
         public int EmployeeID { get; set; }
+
+        [Required]
+        [Display(Name = "Salary")]
+        [DataType(DataType.PhoneNumber)]
         public double EmployeeSalary { get; set; }
+
+        [Required]
+        [Display(Name = "Select Month")]
+        [DataType(DataType.Date)]
         public System.DateTime SalaryMonth { get; set; }
+
+        [Required]
+        [Display(Name = "Date")]
+        [DataType(DataType.Date)]
         public System.DateTime SalaryReciveDate { get; set; }
     
         public virtual Employee Employee { get; set; }

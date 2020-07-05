@@ -11,13 +11,28 @@ namespace Point_Of_Sale
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Purchase
     {
         public int ID { get; set; }
+
+        [Required]
+        [Display(Name = "Select Customer")]
         public int CustomerID { get; set; }
+
+        [Required]
+        [Display(Name = "Select Product")]
         public int ProductID { get; set; }
+
+        [Required]
+        [Display(Name = "Price")]
+        [DataType(DataType.PhoneNumber)]
         public decimal Price { get; set; }
+
+        [Required]
+        [Display(Name = "Quantity")]
+        [DataType(DataType.PhoneNumber)]
         public int Quantity { get; set; }
         public Nullable<decimal> TotalPrice { get; set; }
     
