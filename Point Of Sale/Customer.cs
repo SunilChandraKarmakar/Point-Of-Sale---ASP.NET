@@ -36,7 +36,6 @@ namespace Point_Of_Sale
         [DataType(DataType.Date)]
         public System.DateTime Date { get; set; }
 
-        [Required]
         [Display(Name = "Discription")]
         [StringLength(500, MinimumLength = 2)]
         [DataType(DataType.MultilineText)]

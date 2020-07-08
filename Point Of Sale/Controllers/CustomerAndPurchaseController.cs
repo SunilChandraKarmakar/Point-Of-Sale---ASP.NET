@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +10,8 @@ namespace Point_Of_Sale.Controllers
 {
     public class CustomerAndPurchaseController : Controller
     {
+        private POS_WebEntities _db = new POS_WebEntities();
+
         // GET: CustomerAndPurchase
         public ActionResult Index()
         {
@@ -19,6 +22,7 @@ namespace Point_Of_Sale.Controllers
                 return RedirectToAction("Login", "Employee");
             }
 
+            ViewBag.CustomerList = _db.Customers.ToList();
             return View();
         }
 
@@ -26,30 +30,31 @@ namespace Point_Of_Sale.Controllers
         public JsonResult AddCustomerPurchase(CustomerAndPurchaseViewModel customerAndPurchaseViewModel)
         {    
             bool status = false;
+            int customerId = Convert.ToInt32(customerAndPurchaseViewModel.CustomerId);
+            Customer existCustomer = _db.Customers.Find(customerId);
 
             var isValidModel = TryUpdateModel(customerAndPurchaseViewModel);
             if (isValidModel)
             {
                 using (POS_WebEntities db = new POS_WebEntities())
                 {
-                    Customer customer = new Customer()
+                    Customer updateExistCustomer = new Customer()
                     {
-                        CustomerName = customerAndPurchaseViewModel.CustomerName,
+                        ID = existCustomer.ID,
+                        CustomerName = existCustomer.CustomerName,
                         OrderNumber = customerAndPurchaseViewModel.OrderNumber,
                         Date = customerAndPurchaseViewModel.Date,
                         Description = customerAndPurchaseViewModel.Description
                     };
-                    db.Customers.Add(customer);
 
+                    db.Entry(updateExistCustomer).State = System.Data.Entity.EntityState.Modified;
                     if (db.SaveChanges() > 0)
-                    {
-                        int customerID = db.Customers.Max(c => c.ID);
-
+                    {                           
                         foreach (var item in customerAndPurchaseViewModel.Items)
                         {
                             Purchase purchase = new Purchase()
                             {
-                                CustomerID = customerID,
+                                CustomerID = customerId,
                                 ProductID = item.ProductID,
                                 Price = item.Price,
                                 Quantity = item.Quantity,

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Reporting.WebForms;
+using Point_Of_Sale.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace Point_Of_Sale
 {
     public partial class Report : System.Web.UI.Page
     {
-        POS_WebEntities db = new POS_WebEntities();
-
+        private POS_WebEntities db = new POS_WebEntities();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

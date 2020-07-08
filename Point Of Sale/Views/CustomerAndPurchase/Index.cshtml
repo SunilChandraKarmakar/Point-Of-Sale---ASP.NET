@@ -14,7 +14,15 @@
     <table class="table table-responsive">
         <tr>
             <th>Coustomer Name</th>
-            <td><input type="text" id="customer_name" class="form-control" /></td>
+            <td>
+                <select id="CustomerId" class="form-control">
+                    <option value=""> -- Select Customer -- </option>
+                    @foreach (Customer customer in ViewBag.CustomerList)
+                    {
+                        <option value="@customer.ID">@customer.CustomerName</option>
+                    }
+                </select>
+            </td>
 
             <th>Order Number</th>
             <td><input type="text" id="order_number" class="form-control" /></td>

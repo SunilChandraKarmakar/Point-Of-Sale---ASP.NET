@@ -7,7 +7,7 @@ namespace Point_Of_Sale.Models
 {
     public class CustomerAndPurchaseViewModel
     {
-        public string CustomerName { get; set; }
+        public string CustomerId { get; set; }
         public string OrderNumber { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }

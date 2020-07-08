@@ -67,7 +67,7 @@ namespace Point_Of_Sale.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CustomerName,OrderNumber,Date,Description")] Customer customer)
+        public ActionResult Create(Customer customer)
         {
             if (Session["type"] == null || Session["type"].ToString() == "")
             {
@@ -76,6 +76,10 @@ namespace Point_Of_Sale.Controllers
                 return RedirectToAction("Login", "Employee");
             }
 
+            customer.OrderNumber = "1001";
+            customer.Date = DateTime.Now.Date;
+            customer.Description = "NA";
+
             if (ModelState.IsValid)
             {
                 db.Customers.Add(customer);
@@ -83,6 +87,7 @@ namespace Point_Of_Sale.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ErrorMessage = "Customer insert has been failed! Try again.";
             return View(customer);
         }
 

@@ -46,12 +46,12 @@
                         </li>
 
                         @*<li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">References <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Country", "Index", "Country")</li>
-                                <li>@Html.ActionLink("City", "Index", "City")</li>
-                            </ul>
-                        </li>*@
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">References <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Country", "Index", "Country")</li>
+                                    <li>@Html.ActionLink("City", "Index", "City")</li>
+                                </ul>
+                            </li>*@
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Product <span class="caret"></span></a>
@@ -69,15 +69,15 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sell and Customer<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Sell", "Index", "CustomerAndPurchase")</li>
                                 <li>@Html.ActionLink("Customer Information", "Index", "Customer")</li>
+                                <li>@Html.ActionLink("Sell Product", "Index", "CustomerAndPurchase")</li>
                                 <li>@Html.ActionLink("Sell Information", "Index", "Purchase")</li>
                                 <li><a href="../Report.aspx">Report View</a></li>
                             </ul>
                         </li>
 
                         @*<li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
 
                     </ul>
                     <form class="navbar-form navbar-left">
@@ -106,7 +106,10 @@
     <script src="~/Scripts/CustomerAndPurchaseScript.js"></script>
     @*<script type="text/javascript" charset="utf-8" src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
     <script type="text/javascript" charset="utf-8" src="/Data-Table/datatables.min.js"></script>
-
+    
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    
     <script>
         $(document).ready(function () {
             $('#myTable').DataTable();

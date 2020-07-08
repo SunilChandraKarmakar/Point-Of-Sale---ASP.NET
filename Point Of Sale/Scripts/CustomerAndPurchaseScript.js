@@ -84,7 +84,7 @@ $(function () {
 
         if (isValid) {
             var data = {
-                CustomerName: $("#customer_name").val(),
+                CustomerId: $("#CustomerId").val(),
                 OrderNumber: $("#order_number").val(),
                 Date: $("#date").val(),
                 description: descriptionShow,
