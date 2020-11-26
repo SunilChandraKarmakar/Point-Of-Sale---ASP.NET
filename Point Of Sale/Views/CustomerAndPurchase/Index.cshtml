@@ -13,10 +13,10 @@
     <h2 style="color:chocolate">Coustomer Information</h2>
     <table class="table table-responsive">
         <tr>
-            <th>Coustomer Name</th>
+            <th>Coustomer Email</th>
             <td>
                 <select id="CustomerId" class="form-control">
-                    <option value=""> -- Select Customer -- </option>
+                    <option value=""> -- Select Customer Email-- </option>
                     @foreach (Customer customer in ViewBag.CustomerList)
                     {
                         <option value="@customer.ID">@customer.CustomerName</option>

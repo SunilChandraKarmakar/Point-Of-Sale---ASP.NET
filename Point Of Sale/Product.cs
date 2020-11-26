@@ -37,7 +37,6 @@ namespace Point_Of_Sale
 
         [Required]
         [Display(Name = "Quantity")]
-        [StringLength(500, MinimumLength = 2)]
         [DataType(DataType.PhoneNumber)]
         public int ProductQuentity { get; set; }
 

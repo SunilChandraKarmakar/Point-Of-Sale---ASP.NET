@@ -24,7 +24,7 @@ namespace Point_Of_Sale
         public int ID { get; set; }
 
         [Required]
-        [Display(Name = "Name")]
+        [Display(Name = "Email Address")]
         [StringLength(100, MinimumLength = 2)]
         public string CustomerName { get; set; }
 

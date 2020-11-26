@@ -69,9 +69,6 @@ namespace Point_Of_Sale
         [Display(Name = "Select City")]
         public int EmployeeCityID { get; set; }
 
-        [Required]
-        [Display(Name = "Image")]
-        [DataType(DataType.ImageUrl)]
         public string EmployeePicture { get; set; }
     
         public virtual City City { get; set; }

@@ -12,7 +12,6 @@ namespace Point_Of_Sale.Controllers
         {
             return View();
         }
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
